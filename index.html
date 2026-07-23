@@ -1,0 +1,3147 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>HiinArt — Henné · Épinay-sur-Seine</title>
+<meta name="description" content="HiinArt — Henné à Épinay-sur-Seine. Prise de rendez-vous en ligne." />
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+<style>
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+  :root{
+    --bg:#F5F4F3;
+    --ink:#3B3937;
+    --beige:#E3DBCB;
+    --line:#E2DED6;
+    --muted:#8F8A81;
+    --white:#FFFFFF;
+  }
+  html{scroll-behavior:smooth;}
+  body{
+    font-family:'DM Sans',sans-serif;
+    background:var(--bg);
+    color:var(--ink);
+    font-size:15px;
+    line-height:1.65;
+    -webkit-font-smoothing:antialiased;
+  }
+
+  /* ───── NAV ───── */
+  nav{
+    position:fixed;top:0;left:0;right:0;z-index:90;
+    display:flex;align-items:center;justify-content:space-between;
+    padding:16px 40px;
+    background:rgba(245,244,243,.9);
+    backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--line);
+    transition:padding .3s ease, box-shadow .3s ease;
+  }
+  .nav-logo{
+    font-family:'Cormorant Garamond',serif;
+    font-size:19px;font-weight:500;letter-spacing:.28em;
+    color:var(--ink);text-decoration:none;
+  }
+  nav ul{list-style:none;display:flex;gap:28px;}
+  nav ul a{
+    font-size:12px;letter-spacing:.12em;text-transform:uppercase;
+    color:var(--muted);text-decoration:none;transition:color .2s;
+  }
+  nav ul a:hover{color:var(--ink);}
+  .nav-toggle{display:none;background:none;border:none;cursor:pointer;padding:4px;}
+  .nav-toggle span{display:block;width:22px;height:1px;background:var(--ink);margin:5px 0;transition:.25s;}
+
+  /* ───── HERO ───── */
+  #hero{
+    min-height:100vh;position:relative;
+    display:flex;flex-direction:column;align-items:center;justify-content:center;
+    text-align:center;padding:100px 24px 110px;
+    background:var(--bg);
+  }
+  #hero img{
+    width:min(330px,64vw);height:auto;display:block;
+  }
+  .hero-title{
+    font-family:'Cormorant Garamond',serif;
+    font-size:clamp(26px,5vw,40px);font-weight:400;
+    letter-spacing:.5em;text-indent:.5em;
+    margin-top:-8px;color:var(--ink);
+  }
+  .scroll-hint{
+    position:absolute;bottom:42px;left:0;right:0;
+    display:flex;flex-direction:column;align-items:center;gap:8px;
+  }
+  .scroll-hint p{
+    font-size:11px;letter-spacing:.18em;text-transform:uppercase;
+    color:var(--muted);padding:0 24px;
+  }
+  .scroll-hint .chev{
+    font-size:16px;color:var(--ink);
+    animation:chevBounce 1.9s ease-in-out infinite;
+  }
+  @keyframes chevBounce{
+    0%,100%{transform:translateY(0);opacity:.55;}
+    50%{transform:translateY(7px);opacity:1;}
+  }
+  .hero-account{
+    margin-top:30px;display:flex;flex-direction:column;align-items:center;gap:12px;
+  }
+  .acc-hint-text{
+    font-family:'Cormorant Garamond',serif;font-style:italic;
+    font-size:14.5px;letter-spacing:.02em;color:var(--muted);
+    max-width:260px;line-height:1.4;
+  }
+  .acc-pulse{position:relative;padding:14px 30px;font-size:12px;}
+  .acc-pulse::after{
+    content:"";position:absolute;top:-3px;right:-3px;
+    width:7px;height:7px;border-radius:50%;background:var(--ink);
+    animation:accDot 1.8s ease-in-out infinite;
+  }
+  @keyframes accDot{
+    0%,100%{opacity:.3;transform:scale(.85);}
+    50%{opacity:1;transform:scale(1.15);}
+  }
+
+  /* ───── BUTTONS ───── */
+  .btn{
+    display:inline-block;border:none;cursor:pointer;
+    font-family:'DM Sans',sans-serif;font-weight:500;
+    font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;
+    padding:15px 36px;border-radius:0;
+    text-decoration:none;transition:all .2s;
+  }
+  .btn-dark{background:var(--ink);color:var(--bg);}
+  .btn-dark:hover{background:#000;}
+  .btn-ghost{background:transparent;color:var(--ink);border:1px solid var(--ink);}
+  .btn-ghost:hover{background:var(--ink);color:var(--bg);}
+  .btn-small{padding:11px 18px;font-size:11px;}
+
+  /* ───── COMMON SECTIONS ───── */
+  section{padding:90px 24px;}
+  #galerie{background:#E0DAD0;}
+  .container{max-width:760px;margin:0 auto;}
+  .sec-label{
+    font-size:11px;letter-spacing:.3em;text-transform:uppercase;
+    color:var(--muted);margin-bottom:10px;text-align:center;
+  }
+  .sec-title{
+    font-family:'Cormorant Garamond',serif;
+    font-size:clamp(30px,5vw,44px);font-weight:300;
+    text-align:center;margin-bottom:48px;line-height:1.15;
+  }
+  #hero{position:relative;}
+
+  /* ───── INFOS ───── */
+  #infos{background:var(--white);border-top:1px solid var(--line);border-bottom:1px solid var(--line);}
+  .info-list{list-style:none;}
+  .info-list li{
+    padding:18px 4px;border-bottom:1px solid var(--line);
+    font-weight:300;font-size:14.5px;color:var(--ink);
+    display:flex;gap:14px;align-items:flex-start;
+  }
+  .info-list li:last-child{border-bottom:none;}
+  .info-list li.promo{
+    background:var(--beige);
+    padding:18px 16px;border-bottom:none;margin-bottom:6px;
+  }
+  .info-list .tiret{flex-shrink:0;}
+  .info-list strong{font-weight:500;}
+
+  /* ───── TARIFS ───── */
+  #tarifs{background:var(--white);border-top:1px solid var(--line);}
+  .tarif-row{
+    display:flex;align-items:baseline;gap:16px;
+    padding:20px 4px;border-bottom:1px solid var(--line);
+  }
+  .tarif-row:first-of-type{border-top:1px solid var(--line);}
+  .tarif-nom{
+    font-family:'Cormorant Garamond',serif;
+    font-size:22px;font-weight:400;white-space:nowrap;color:var(--ink);
+  }
+  .tarif-dots{flex:1;border-bottom:1px dotted #C9C3B7;transform:translateY(-4px);}
+  .tarif-duree{font-size:13px;color:#6E6960;letter-spacing:.04em;white-space:nowrap;}
+  .tarif-prix{font-size:18px;font-weight:500;white-space:nowrap;min-width:64px;text-align:right;color:var(--ink);}
+  .tarif-note{
+    margin-top:28px;text-align:center;font-size:14px;color:#6E6960;font-weight:300;
+  }
+  .tarif-note strong{color:var(--ink);font-weight:500;}
+  .tarif-note a{color:var(--ink);text-decoration:underline;text-underline-offset:3px;}
+  .tarif-note.small{margin-top:10px;font-size:12.5px;}
+
+  /* ───── RDV ───── */
+  #rdv{background:var(--white);border-top:1px solid var(--line);}
+  .step-head{
+    display:flex;align-items:center;gap:14px;
+    margin:48px 0 20px;
+  }
+  .step-head:first-of-type{margin-top:0;}
+  .step-num{
+    font-family:'Cormorant Garamond',serif;font-size:15px;
+    width:32px;height:32px;border:1px solid var(--ink);border-radius:50%;
+    display:flex;align-items:center;justify-content:center;flex-shrink:0;
+  }
+  .step-name{font-size:12px;letter-spacing:.22em;text-transform:uppercase;}
+
+  .presta-sel{border-top:1px solid var(--line);}
+  .presta-sel-row{
+    display:flex;align-items:center;gap:12px;
+    padding:16px 4px;border-bottom:1px solid var(--line);
+  }
+  .ps-info{flex:1;min-width:0;}
+  .ps-nom{font-size:15px;font-weight:400;}
+  .ps-meta{font-size:12px;color:var(--muted);}
+  .stepper{display:flex;align-items:center;gap:0;border:1px solid var(--line);}
+  .stepper button{
+    width:34px;height:34px;background:var(--white);border:none;cursor:pointer;
+    font-size:16px;color:var(--ink);transition:background .15s;line-height:1;
+    font-family:'DM Sans',sans-serif;
+  }
+  .stepper button:hover{background:var(--beige);}
+  .stepper .qty{
+    width:34px;text-align:center;font-size:14px;font-weight:500;
+    border-left:1px solid var(--line);border-right:1px solid var(--line);
+    height:34px;display:flex;align-items:center;justify-content:center;
+  }
+  .check-autre{
+    width:20px;height:20px;accent-color:var(--ink);cursor:pointer;flex-shrink:0;
+  }
+
+  /* ── Autre partie du corps ── */
+  .autre-card{
+    border:1px solid var(--line);background:var(--white);
+    padding:16px;margin:14px 0;
+  }
+  .autre-card .ps-nom{font-weight:500;}
+  .autre-card .ps-meta{margin-top:2px;}
+  .autre-parts-label{
+    font-size:11.5px;text-transform:uppercase;letter-spacing:.06em;
+    color:var(--muted);margin:14px 0 8px;
+  }
+  .autre-parts{display:flex;flex-wrap:wrap;gap:8px;}
+  .part-pill{
+    display:flex;align-items:center;gap:6px;
+    border:1px solid var(--line);padding:7px 12px;font-size:12.5px;
+    cursor:pointer;transition:background .15s,border-color .15s;
+    background:var(--bg);
+  }
+  .part-pill:has(input:checked){
+    background:var(--ink);border-color:var(--ink);color:var(--white);
+  }
+  .part-pill input{accent-color:var(--ink);width:14px;height:14px;cursor:pointer;}
+
+  /* ── Jagua add-on ── */
+  .jagua-card{
+    border:1px dashed var(--muted);background:var(--beige);
+    padding:16px;margin-top:14px;display:flex;align-items:flex-start;gap:12px;
+  }
+  .jagua-card .ps-nom{font-weight:500;}
+  .jagua-badge{
+    background:#F3C4D6;color:#5A2036;font-size:10.5px;padding:2px 8px;
+    border-radius:20px;margin-left:6px;font-weight:600;white-space:nowrap;
+  }
+
+  .total-bar{
+    margin-top:18px;background:var(--beige);
+    padding:16px 20px;display:flex;justify-content:space-between;align-items:center;
+    font-size:14px;flex-wrap:wrap;gap:8px;
+  }
+  .total-bar strong{font-weight:500;}
+  .total-bar .tb-right{font-size:13px;color:var(--muted);}
+
+  /* calendar */
+  .cal-wrap{border:1px solid var(--line);padding:22px;}
+  .cal-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;}
+  .cal-month{font-family:'Cormorant Garamond',serif;font-size:21px;font-weight:400;text-transform:capitalize;}
+  .cal-nav{display:flex;gap:8px;}
+  .cal-nav button{
+    width:32px;height:32px;border:1px solid var(--line);background:var(--white);
+    cursor:pointer;font-size:14px;color:var(--ink);transition:background .15s;
+  }
+  .cal-nav button:hover{background:var(--beige);}
+  .cal-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:4px;}
+  .cal-dayname{
+    font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);
+    text-align:center;padding:6px 0;
+  }
+  .cal-cell{
+    aspect-ratio:1;display:flex;align-items:center;justify-content:center;
+    font-size:13px;background:var(--white);border:1px solid transparent;
+    cursor:pointer;transition:all .15s;color:var(--ink);
+  }
+  .cal-cell:hover:not(.off):not(.past){border-color:var(--ink);}
+  .cal-cell.past{color:#CFCBC2;cursor:default;}
+  .cal-cell.off{cursor:default;background:transparent;}
+  .cal-cell.today{text-decoration:underline;text-underline-offset:3px;}
+  .cal-cell.selected{background:var(--ink);color:var(--bg);}
+  .slots-wrap{margin-top:22px;}
+  .slots-title{font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);margin-bottom:12px;}
+  .slots-grid{
+    display:grid;grid-template-columns:repeat(3,1fr);gap:8px;
+    max-height:280px;overflow-y:auto;padding:4px 4px 4px 0;
+  }
+  .slot{
+    border:1px solid var(--line);background:var(--white);
+    padding:9px 6px;font-size:12px;cursor:pointer;transition:all .15s;
+    font-family:'DM Sans',sans-serif;color:var(--ink);text-align:center;
+  }
+  .slot:hover{border-color:var(--ink);}
+  .slot.selected{background:var(--ink);color:var(--bg);border-color:var(--ink);}
+  .slots-empty{font-size:13.5px;color:var(--muted);font-weight:300;font-style:italic;}
+
+  /* form */
+  .form-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+  .fg{display:flex;flex-direction:column;gap:6px;}
+  .fg.full{grid-column:1/-1;}
+  .fg label{font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);}
+  .fg input,.fg textarea{
+    font-family:'DM Sans',sans-serif;font-size:14px;color:var(--ink);
+    background:var(--bg);border:1px solid var(--line);
+    padding:13px 15px;outline:none;transition:border-color .2s;width:100%;
+    border-radius:0;
+  }
+  .fg input:focus,.fg textarea:focus{border-color:var(--ink);}
+  .fg textarea{resize:vertical;min-height:96px;}
+  .recap{
+    margin-top:22px;border:1px solid var(--line);padding:18px 20px;
+    font-size:13.5px;color:var(--muted);font-weight:300;line-height:1.8;
+  }
+  .recap strong{color:var(--ink);font-weight:500;}
+  .submit-wrap{margin-top:26px;text-align:center;}
+  .form-err{
+    margin-top:14px;text-align:center;
+    font-size:13px;color:#A0522D;
+    min-height:0;
+  }
+
+  /* confirmation modal */
+  .modal-bg{
+    display:none;position:fixed;inset:0;z-index:200;
+    background:rgba(59,57,55,.45);backdrop-filter:blur(3px);
+    align-items:center;justify-content:center;padding:20px;
+  }
+  .modal-bg.open{display:flex;}
+  .modal{
+    background:var(--bg);max-width:480px;width:100%;
+    padding:44px 36px;text-align:center;
+    border:1px solid var(--line);
+    max-height:88vh;overflow-y:auto;
+  }
+  .modal h3{
+    font-family:'Cormorant Garamond',serif;
+    font-size:30px;font-weight:300;margin-bottom:10px;line-height:1.2;
+  }
+  .modal .m-sub{font-size:14px;color:var(--muted);font-weight:300;margin-bottom:24px;}
+  .modal-admin{max-width:920px !important;width:94vw;max-height:92vh;text-align:left;padding:34px 30px;}
+  .adm-tabs{display:flex;gap:6px;margin-bottom:24px;border-bottom:1px solid var(--line);flex-wrap:wrap;}
+  .adm-tab-btn{background:transparent;border:none;padding:10px 16px;font-size:13px;cursor:pointer;color:var(--muted);border-bottom:2px solid transparent;font-family:inherit;}
+  .adm-badge{display:inline-block;background:#c0392b;color:#fff;border-radius:10px;padding:1px 7px;font-size:11px;margin-left:4px;}
+  .adm-tab-btn.active{color:var(--ink);border-bottom:2px solid var(--ink);font-weight:500;}
+  .adm-tab-page{display:none;}
+  .adm-tab-page.active{display:block;}
+  /* loyalty coupon */
+  .loyalty-card{
+    background:linear-gradient(135deg, #fdf6f8, #f9eef1);
+    border:1px solid #f0d9e0;
+    padding:22px 18px 18px;margin-bottom:20px;
+    position:relative;overflow:hidden;
+    animation:loyaltyIn .6s cubic-bezier(.16,1,.3,1);
+  }
+  .loyalty-card::before{
+    content:"";position:absolute;top:-30px;right:-30px;
+    width:90px;height:90px;border-radius:50%;
+    background:radial-gradient(circle, rgba(214,124,153,.18), transparent 70%);
+  }
+  @keyframes loyaltyIn{
+    from{opacity:0;transform:translateY(14px) scale(.97);}
+    to{opacity:1;transform:translateY(0) scale(1);}
+  }
+  .loyalty-title{
+    font-family:'Cormorant Garamond',serif;font-style:italic;
+    font-size:16px;color:#A0527A;margin-bottom:14px;text-align:center;
+  }
+  .loyalty-stamps{
+    display:grid;grid-template-columns:repeat(5,1fr);gap:8px;
+    margin-bottom:12px;
+  }
+  .loyalty-stamp{
+    aspect-ratio:1/1;border-radius:50%;
+    display:flex;align-items:center;justify-content:center;
+    border:1.5px dashed #e0bcc9;
+    background:#fff;
+    position:relative;
+  }
+  .loyalty-stamp svg{width:46%;height:46%;}
+  .loyalty-stamp.filled{
+    border:1.5px solid #D67C99;background:#D67C99;
+    animation:stampDown .65s cubic-bezier(.36,.07,.19,.97) backwards;
+    box-shadow:0 3px 8px rgba(214,124,153,.35);
+  }
+  .loyalty-stamp.filled::after{
+    content:"";position:absolute;inset:-6px;border-radius:50%;
+    border:2px solid #D67C99;opacity:0;
+    animation:inkSplash .55s ease-out backwards;
+    animation-delay:inherit;
+  }
+  .loyalty-stamp.filled svg{fill:#fff;}
+  .loyalty-stamp.next{
+    border:1.5px solid #D67C99;
+    animation:nextPulse 1.6s ease-in-out infinite;
+  }
+  .loyalty-stamp.next svg{fill:none;stroke:#D67C99;stroke-width:1.6;}
+  .loyalty-stamp.reward{
+    border:1.5px solid #C9A23E;background:linear-gradient(135deg,#F3D87A,#C9A23E);
+    animation:stampDown .7s cubic-bezier(.36,.07,.19,.97) backwards, rewardGlow 1.8s ease-in-out 0.7s infinite;
+  }
+  .loyalty-stamp.reward::after{
+    content:"";position:absolute;inset:-6px;border-radius:50%;
+    border:2px solid #C9A23E;opacity:0;
+    animation:inkSplash .6s ease-out backwards;
+    animation-delay:inherit;
+  }
+  .loyalty-stamp.reward svg{fill:#fff;}
+  .loyalty-stamp.reward-next{
+    border:1.5px solid #C9A23E;
+    animation:rewardPulse 1.4s ease-in-out infinite;
+  }
+  .loyalty-stamp.reward-next svg{fill:none;stroke:#C9A23E;stroke-width:1.6;}
+  @keyframes stampDown{
+    0%{transform:translateY(-140%) scale(1.6) rotate(-22deg);opacity:0;}
+    55%{transform:translateY(0) scale(1) rotate(-22deg);opacity:1;}
+    68%{transform:translateY(2px) scale(.88) rotate(-4deg);}
+    80%{transform:translateY(0) scale(1.06) rotate(2deg);}
+    100%{transform:translateY(0) scale(1) rotate(0);}
+  }
+  @keyframes inkSplash{
+    0%{opacity:0;transform:scale(.6);}
+    55%{opacity:0;}
+    65%{opacity:.7;transform:scale(.9);}
+    100%{opacity:0;transform:scale(1.5);}
+  }
+  @keyframes nextPulse{
+    0%,100%{box-shadow:0 0 0 0 rgba(214,124,153,.35);transform:scale(1);}
+    50%{box-shadow:0 0 0 7px rgba(214,124,153,0);transform:scale(1.05);}
+  }
+  @keyframes rewardPulse{
+    0%,100%{box-shadow:0 0 0 0 rgba(201,162,62,.4);transform:scale(1);}
+    50%{box-shadow:0 0 0 9px rgba(201,162,62,0);transform:scale(1.08);}
+  }
+  @keyframes rewardGlow{
+    0%,100%{box-shadow:0 3px 8px rgba(201,162,62,.4);}
+    50%{box-shadow:0 3px 18px rgba(201,162,62,.75);}
+  }
+  .loyalty-reward-banner{
+    text-align:center;font-family:'Cormorant Garamond',serif;font-style:italic;
+    font-size:17px;color:#A87B1F;margin:14px 0 6px;
+    animation:rewardBannerIn .7s cubic-bezier(.16,1,.3,1) .3s backwards;
+  }
+  @keyframes rewardBannerIn{
+    from{opacity:0;transform:translateY(8px) scale(.95);}
+    to{opacity:1;transform:translateY(0) scale(1);}
+  }
+  .loyalty-note{
+    font-size:11.5px;color:#9a7180;text-align:center;line-height:1.5;
+  }
+  .loyalty-reward{
+    text-align:center;font-size:12.5px;color:#A0527A;font-weight:500;
+    margin-top:8px;letter-spacing:.02em;
+  }
+
+  .addr-box{
+    background:var(--ink);color:var(--bg);
+    padding:20px 22px;margin-bottom:20px;
+  }
+  .addr-box .a-label{font-size:10px;letter-spacing:.26em;text-transform:uppercase;opacity:.7;margin-bottom:6px;}
+  .addr-box .a-main{font-family:'Cormorant Garamond',serif;font-size:22px;}
+  .addr-box .a-note{font-size:12.5px;margin-top:6px;opacity:.85;}
+  .m-recap{
+    text-align:left;font-size:13px;color:var(--muted);font-weight:300;
+    border:1px solid var(--line);padding:14px 18px;margin-bottom:24px;line-height:1.8;
+  }
+  .m-recap strong{color:var(--ink);font-weight:500;}
+  .m-warn{
+    display:none;text-align:left;font-size:12.5px;
+    background:var(--beige);padding:12px 16px;margin-bottom:20px;color:var(--ink);
+  }
+
+  /* footer */
+  footer{
+    background:var(--ink);color:rgba(245,244,243,.55);
+    text-align:center;padding:44px 24px 36px;font-size:12px;letter-spacing:.06em;
+  }
+  footer .f-logo{
+    font-family:'Cormorant Garamond',serif;font-size:18px;letter-spacing:.3em;
+    color:var(--bg);margin-bottom:14px;
+  }
+  footer .f-links{display:flex;gap:22px;justify-content:center;margin-bottom:18px;flex-wrap:wrap;}
+  footer .f-links a{color:rgba(245,244,243,.75);text-decoration:none;font-size:12.5px;letter-spacing:.1em;}
+  footer .f-links a:hover{color:var(--bg);}
+  footer .f-contact{font-size:12.5px;color:rgba(245,244,243,.75);margin-bottom:10px;}
+  footer .f-contact a{color:inherit;text-decoration:underline;}
+  .admin-link{
+    color:rgba(245,244,243,.25)!important;font-size:10px!important;
+    cursor:pointer;letter-spacing:.14em!important;
+  }
+  .admin-link:hover{color:rgba(245,244,243,.6)!important;}
+
+  /* ───── ADMIN ───── */
+  .adm-field{display:flex;flex-direction:column;gap:6px;margin-bottom:16px;text-align:left;}
+  .adm-field label{font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);}
+  .adm-field input,.adm-field select{
+    font-family:'DM Sans',sans-serif;font-size:14px;
+    background:var(--white);border:1px solid var(--line);padding:11px 14px;outline:none;width:100%;
+  }
+  .adm-field input:focus,.adm-field select:focus{border-color:var(--ink);}
+  .adm-section-title{
+    font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);
+    margin:22px 0 10px;text-align:left;border-bottom:1px solid var(--line);padding-bottom:6px;
+  }
+  .adm-item{
+    display:flex;align-items:center;justify-content:space-between;gap:10px;
+    background:var(--white);border:1px solid var(--line);
+    padding:10px 14px;margin-bottom:8px;font-size:13.5px;text-align:left;
+  }
+  .adm-item .x{
+    background:none;border:none;cursor:pointer;font-size:17px;color:var(--muted);line-height:1;
+  }
+  .adm-item .x:hover{color:#A0522D;}
+  .adm-empty{font-size:13px;color:var(--muted);font-style:italic;font-weight:300;text-align:left;}
+  .adm-row2{display:flex;gap:10px;align-items:flex-end;}
+  .adm-row2 .adm-field{flex:1;margin-bottom:0;}
+  .adm-note{
+    margin-top:18px;font-size:12px;color:var(--muted);font-weight:300;text-align:left;
+    background:var(--beige);padding:10px 14px;line-height:1.6;
+  }
+
+  @media (max-width:640px){
+    nav{padding:14px 18px;}
+    .nav-toggle{display:block;}
+    nav ul{
+      list-style:none;display:flex;flex-direction:column;align-items:flex-end;
+      gap:0;position:fixed;top:54px;right:18px;
+      background:rgba(245,244,243,.98);backdrop-filter:blur(10px);
+      border:1px solid var(--line);
+      padding:0;max-height:0;overflow:hidden;opacity:0;
+      transition:max-height .3s ease, opacity .25s ease, padding .3s ease;
+      width:auto;min-width:180px;
+    }
+    nav ul.open{max-height:300px;opacity:1;padding:10px 0;}
+    nav ul li{width:100%;}
+    nav ul a{display:block;padding:12px 20px;text-align:right;white-space:nowrap;}
+    section{padding:70px 18px;}
+    .form-grid{grid-template-columns:1fr;}
+    .fg.full{grid-column:1;}
+    .tarif-nom{font-size:17px;white-space:normal;}
+    .tarif-duree{display:none;}
+    .cal-wrap{padding:14px;}
+    .modal{padding:34px 22px;}
+    .gal-grid{gap:10px;}
+    .gal-item{width:200px;height:270px;}
+  }
+  @media (prefers-reduced-motion: reduce){
+    html{scroll-behavior:auto;}
+    *{transition:none!important;animation:none!important;}
+  }
+
+  /* ───── SCROLL REVEAL ───── */
+  .reveal{
+    opacity:0;transform:translateY(28px);
+    transition:opacity .8s cubic-bezier(.16,1,.3,1), transform .8s cubic-bezier(.16,1,.3,1);
+  }
+  .reveal.visible{opacity:1;transform:translateY(0);}
+  .reveal-stagger > *{
+    opacity:0;transform:translateY(20px);
+    transition:opacity .6s ease, transform .6s ease;
+  }
+  .reveal-stagger.visible > *{opacity:1;transform:translateY(0);}
+  .reveal-stagger.visible > *:nth-child(1){transition-delay:.05s;}
+  .reveal-stagger.visible > *:nth-child(2){transition-delay:.12s;}
+  .reveal-stagger.visible > *:nth-child(3){transition-delay:.19s;}
+  .reveal-stagger.visible > *:nth-child(4){transition-delay:.26s;}
+  .reveal-stagger.visible > *:nth-child(5){transition-delay:.33s;}
+  .reveal-stagger.visible > *:nth-child(6){transition-delay:.4s;}
+  .reveal-stagger.visible > *:nth-child(7){transition-delay:.47s;}
+
+  /* hero subtle entrance */
+  #hero img, #hero .hero-title, #hero .hero-account, #hero .scroll-hint{
+    opacity:0;animation:heroIn .9s ease forwards;
+  }
+  #hero img{animation-delay:.05s;}
+  #hero .hero-title{animation-delay:.25s;}
+  #hero .hero-account{animation-delay:.42s;}
+  #hero .scroll-hint{animation-delay:.6s;}
+  @keyframes heroIn{
+    from{opacity:0;transform:translateY(16px);}
+    to{opacity:1;transform:translateY(0);}
+  }
+
+  /* subtle nav shrink on scroll */
+  nav.scrolled{padding-top:11px;padding-bottom:11px;box-shadow:0 4px 18px rgba(59,57,55,.06);}
+
+  /* tarif row hover */
+  .tarif-row{transition:transform .2s ease,background .2s ease;}
+  .tarif-row:hover{background:var(--beige);transform:translateX(4px);}
+.acc-toast{
+  position:fixed; top:24px; left:50%; transform:translateX(-50%) translateY(-30px);
+  background:var(--ink); color:var(--bg); padding:14px 26px; font-size:14px;
+  letter-spacing:.02em; opacity:0; z-index:9999; pointer-events:none;
+  transition:opacity .35s ease, transform .35s ease;
+}
+.acc-toast.show{ opacity:1; transform:translateX(-50%) translateY(0); }
+
+.ref-box{
+  background:var(--beige);padding:16px 18px;text-align:left;
+}
+.ref-label{font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:6px;}
+.ref-code-row{display:flex;align-items:center;gap:10px;}
+.ref-code{
+  font-family:'Cormorant Garamond',serif;font-size:19px;letter-spacing:.06em;
+  font-weight:600;color:var(--ink);flex:1;
+}
+.ref-copy{
+  background:var(--ink);color:var(--bg);border:none;cursor:pointer;
+  font-size:11px;letter-spacing:.06em;text-transform:uppercase;
+  padding:8px 14px;transition:background .2s;
+}
+.ref-copy:hover{background:#000;}
+.ref-hint{font-size:12px;color:var(--muted);margin-top:10px;line-height:1.5;}
+
+.dash-stat{
+  display:flex;align-items:baseline;gap:8px;justify-content:center;
+  margin:18px 0;
+}
+.dash-stat-num{font-family:'Cormorant Garamond',serif;font-size:34px;color:var(--ink);font-weight:600;}
+.dash-stat-label{font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);}
+.dash-box{text-align:left;}
+.dash-scroll{max-height:200px;overflow-y:auto;}
+.dash-item{
+  border-bottom:1px solid var(--line);padding:10px 0;font-size:13px;
+  display:flex;justify-content:space-between;align-items:center;gap:10px;
+}
+.dash-item .dash-date{font-weight:500;color:var(--ink);}
+.dash-item .dash-presta{color:var(--muted);font-size:12px;}
+.dash-empty{color:var(--muted);font-size:12.5px;font-style:italic;padding:10px 0;}
+.dash-next{
+  background:var(--beige);padding:14px 16px;
+}
+.dash-next .dash-date{font-size:15px;}
+
+/* ───── GALERIE / AVIS ───── */
+.gal-grid{
+  display:flex;flex-direction:row;gap:14px;margin-top:30px;
+  overflow-x:auto;overflow-y:hidden;padding:4px 4px 14px 4px;
+  scroll-snap-type:x mandatory;
+  -webkit-overflow-scrolling:touch;
+}
+.gal-grid::-webkit-scrollbar{height:6px;}
+.gal-grid::-webkit-scrollbar-thumb{background:var(--line);border-radius:3px;}
+.gal-item{
+  position:relative;overflow:hidden;border-radius:8px;
+  box-shadow:0 8px 24px rgba(59,57,55,.14);
+  cursor:pointer;flex-shrink:0;
+  background:#fff;width:240px;height:320px;
+  scroll-snap-align:start;
+}
+.gal-item img{
+  width:100%;height:100%;object-fit:cover;display:block;
+  transition:transform .4s ease;
+}
+.gal-item:hover img{transform:scale(1.04);}
+.gal-item .gal-caption{
+  position:absolute;left:0;right:0;bottom:0;
+  background:linear-gradient(to top, rgba(20,18,16,.7), transparent);
+  color:#fff;font-size:11.5px;letter-spacing:.04em;
+  padding:24px 12px 10px;opacity:0;transition:opacity .25s;
+}
+.gal-item:hover .gal-caption{opacity:1;}
+.gal-item video{
+  width:100%;height:100%;object-fit:cover;display:block;
+  transition:transform .4s ease;
+}
+.gal-item:hover video{transform:scale(1.04);}
+.gal-play{
+  position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);
+  width:46px;height:46px;border-radius:50%;
+  background:rgba(255,255,255,.9);color:var(--ink);
+  display:flex;align-items:center;justify-content:center;font-size:15px;
+  pointer-events:none;box-shadow:0 4px 12px rgba(0,0,0,.2);
+}
+.gal-empty{color:var(--muted);font-size:13px;font-style:italic;}
+
+/* ───── ACCORDÉON À SAVOIR ───── */
+.acc-list{margin-top:30px;display:flex;flex-direction:column;gap:8px;}
+.acc-card{border:1px solid var(--line);background:var(--bg);overflow:hidden;}
+.acc-card.promo{background:var(--beige);border-color:var(--beige);}
+.acc-head{
+  width:100%;display:flex;align-items:center;gap:12px;
+  background:none;border:none;cursor:pointer;
+  padding:16px 18px;text-align:left;font-family:inherit;
+}
+.acc-head .tiret{font-size:17px;}
+.acc-title{
+  flex:1;font-size:13.5px;letter-spacing:.03em;font-weight:500;color:var(--ink);
+}
+.acc-chev{font-size:16px;color:var(--muted);transition:transform .25s;}
+.acc-card.open .acc-chev{transform:rotate(45deg);}
+.acc-body{
+  max-height:0;overflow:hidden;transition:max-height .3s ease;
+}
+.acc-body p{
+  padding:0 18px 18px 47px;font-size:13.5px;color:var(--muted);line-height:1.6;
+}
+
+.social-links{margin-top:34px;text-align:center;}
+.social-label{
+  font-size:11px;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--muted);margin-bottom:12px;
+}
+.social-row{
+  display:flex;flex-direction:column;align-items:center;gap:10px;
+}
+.social-row a{
+  font-family:'Cormorant Garamond',serif;font-size:16px;
+  letter-spacing:.02em;color:var(--ink);text-decoration:none;
+  border-bottom:1px solid var(--line);padding-bottom:2px;
+  transition:border-color .2s;
+}
+.social-row a:hover{border-color:var(--ink);}
+@media (min-width:560px){
+  .social-row{flex-direction:row;gap:30px;}
+}
+.gal-lightbox{
+  position:fixed;inset:0;background:rgba(20,18,16,.92);z-index:200;
+  display:none;align-items:center;justify-content:center;padding:30px;
+}
+.gal-lightbox.open{display:flex;}
+.gal-lightbox img{max-width:100%;max-height:85vh;object-fit:contain;box-shadow:0 10px 40px rgba(0,0,0,.4);}
+.gal-lightbox-close{
+  position:absolute;top:20px;right:24px;color:#fff;font-size:28px;
+  background:none;border:none;cursor:pointer;
+}
+.review-form-compact{
+  display:flex;align-items:center;gap:10px;margin-bottom:14px;flex-wrap:wrap;
+}
+.review-form-compact input[type="text"]{
+  flex:1;min-width:140px;font-family:inherit;font-size:13px;
+  padding:9px 12px;border:1px solid var(--line);background:var(--bg);
+}
+.star-picker{display:flex;gap:3px;font-size:19px;}
+.star-picker span{
+  cursor:pointer;color:#fff;
+  -webkit-text-stroke:1px var(--ink);
+  text-shadow:0 1px 3px rgba(0,0,0,.25);
+  transition:color .15s,transform .15s;
+}
+.star-picker span:hover{transform:scale(1.1);}
+.star-picker span.active{color:#F5C518;-webkit-text-stroke:1.5px var(--ink);}
+.reviews-scroll{
+  display:flex;flex-direction:row;gap:12px;
+  overflow-x:auto;overflow-y:hidden;
+  padding:4px 4px 14px 4px;
+  scroll-snap-type:x mandatory;
+  -webkit-overflow-scrolling:touch;
+}
+.reviews-scroll::-webkit-scrollbar{height:6px;}
+.reviews-scroll::-webkit-scrollbar-thumb{background:var(--line);border-radius:3px;}
+.review-item{
+  border:1px solid var(--line);background:var(--bg);
+  padding:16px 18px;text-align:left;border-radius:4px;
+  position:relative;flex-shrink:0;width:240px;
+  scroll-snap-align:start;
+}
+.review-top{display:flex;justify-content:space-between;align-items:flex-start;}
+.review-menu-wrap{position:relative;}
+.review-menu-btn{
+  background:none;border:none;cursor:pointer;color:var(--muted);
+  font-size:16px;padding:0 4px;line-height:1;
+}
+.review-menu-btn:hover{color:var(--ink);}
+.review-menu{
+  display:none;position:absolute;right:0;top:22px;z-index:10;
+  background:var(--bg);border:1px solid var(--line);
+  box-shadow:0 6px 18px rgba(59,57,55,.15);min-width:140px;
+}
+.review-menu.open{display:block;}
+.review-menu button{
+  width:100%;text-align:left;background:none;border:none;cursor:pointer;
+  padding:10px 14px;font-size:12.5px;color:var(--ink);letter-spacing:.03em;
+}
+.review-menu button:hover{background:var(--beige);}
+.review-stars{color:var(--ink);font-size:13px;letter-spacing:2px;margin-bottom:4px;}
+.review-user{font-weight:500;font-size:13px;}
+.review-text{font-size:14px;color:var(--muted);margin-top:4px;line-height:1.5;}
+</style>
+</head>
+<body>
+
+<!-- ═════ NAV ═════ -->
+<nav>
+  <a href="#hero" class="nav-logo">HIINART</a>
+  <button class="nav-toggle" id="navToggle" onclick="toggleNav()" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+  <ul id="navMenu">
+    <li><a href="#galerie" onclick="closeNav()">Galerie</a></li>
+    <li><a href="#infos" onclick="closeNav()">À savoir</a></li>
+    <li><a href="#tarifs" onclick="closeNav()">Tarifs</a></li>
+    <li><a href="#rdv" onclick="closeNav()">Réserver</a></li>
+    <li><a href="#" id="accountLink" onclick="closeNav();openAccount();return false;">Mon compte</a></li>
+  </ul>
+</nav>
+
+<!-- ═════ HERO ═════ -->
+<section id="hero">
+      <img src="data:image/png;base64,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" alt="HiinArt — Henné" />
+  <h1 class="hero-title">HIINART</h1>
+  <div class="hero-account">
+    <p class="acc-hint-text">Enregistrez-vous en 2 clics pour bénéficier de bien + d'avantages !</p>
+    <button class="btn btn-ghost acc-pulse" onclick="openAccount()" id="heroAccountBtn">Mon compte</button>
+  </div>
+  <div class="scroll-hint">
+    <p>Scrollez plus bas pour avoir accès à l'intégralité du site !</p>
+    <span class="chev">↓</span>
+  </div>
+</section>
+
+<!-- ═════ GALERIE ═════ -->
+<section id="galerie" class="reveal">
+  <div class="container">
+    <p class="sec-label">Mes créations</p>
+    <h2 class="sec-title">Galerie</h2>
+    <div class="gal-grid" id="galGrid"></div>
+
+    <p class="sec-label" style="margin-top:60px;">Vos retours</p>
+    <h2 class="sec-title">Avis</h2>
+
+    <div id="reviewFormWrap" class="review-form-compact" style="display:none;">
+      <div class="star-picker" id="starPicker"></div>
+      <input type="text" id="reviewText" placeholder="Votre avis..." />
+      <button class="btn btn-dark btn-small" onclick="submitReview()">Publier</button>
+    </div>
+    <p class="form-err" id="reviewErr"></p>
+    <p id="reviewLoginHint" class="m-sub" style="margin-bottom:18px;">
+      <a href="#" onclick="openAccount();return false;">Connecte-toi</a> à ton compte pour laisser un avis.
+    </p>
+
+    <div class="reviews-scroll" id="reviewsList"></div>
+  </div>
+</section>
+
+<!-- ═════ INFOS ═════ -->
+<section id="infos" class="reveal">
+  <div class="container">
+    <p class="sec-label">Avant de réserver</p>
+    <h2 class="sec-title">À savoir</h2>
+    <div class="acc-list reveal-stagger">
+      <div class="acc-card promo">
+        <button class="acc-head" onclick="toggleInfo(this)">
+          <span class="tiret">🎁</span><span class="acc-title">Promo fidélité</span><span class="acc-chev">+</span>
+        </button>
+        <div class="acc-body" id="promoBody">
+          <p id="promoText"><strong>−50% sur votre 2ᵉ prestation</strong> si vous ramenez une cliente à votre nom !</p>
+          <div class="ref-box" id="promoRefBox" style="display:none;margin-top:14px;">
+            <p class="ref-label">Ton code de parrainage</p>
+            <div class="ref-code-row">
+              <span class="ref-code" id="promoRefCode">—</span>
+              <button class="ref-copy" onclick="copyPromoReferralCode()" id="promoRefCopyBtn">Copier</button>
+            </div>
+          </div>
+          <p id="promoRefLoginHint" class="m-sub" style="margin-top:14px;">
+            <a href="#" onclick="openAccount();return false;">Connecte-toi</a> pour récupérer ton code de parrainage et profiter de la promo !
+          </p>
+        </div>
+      </div>
+      <div class="acc-card">
+        <button class="acc-head" onclick="toggleInfo(this)">
+          <span class="tiret">💸</span><span class="acc-title">Acomptes</span><span class="acc-chev">+</span>
+        </button>
+        <div class="acc-body"><p><strong>Pas d'acompte</strong> pour les rendez-vous individuels — tout repose sur la confiance. Pour les événements (mariage, henna party… à partir de 6 personnes) : devis personnalisé avec acompte.</p></div>
+      </div>
+      <div class="acc-card">
+        <button class="acc-head" onclick="toggleInfo(this)">
+          <span class="tiret">👭</span><span class="acc-title">Accompagnatrice</span><span class="acc-chev">+</span>
+        </button>
+        <div class="acc-body"><p>Une <strong>accompagnatrice (fille)</strong> est acceptée, dans le respect du lieu.</p></div>
+      </div>
+      <div class="acc-card">
+        <button class="acc-head" onclick="toggleInfo(this)">
+          <span class="tiret">🌿</span><span class="acc-title">Type de henné</span><span class="acc-chev">+</span>
+        </button>
+        <div class="acc-body"><p>La plupart des prestations sont réalisées au <strong>henné chimique</strong> (type khaleeji) : bonne qualité, anti-allergène, il <strong>marque instantanément</strong>. Henné <strong>100% naturel</strong> disponible sur demande.</p></div>
+      </div>
+      <div class="acc-card">
+        <button class="acc-head" onclick="toggleInfo(this)">
+          <span class="tiret">🕐</span><span class="acc-title">Horaires & annulation</span><span class="acc-chev">+</span>
+        </button>
+        <div class="acc-body"><p>Réservation possible jusqu'à <strong>3h avant</strong>. Annulation via <strong>Instagram</strong>, au plus tard la veille.</p></div>
+      </div>
+      <div class="acc-card">
+        <button class="acc-head" onclick="toggleInfo(this)">
+          <span class="tiret">💶</span><span class="acc-title">Paiement</span><span class="acc-chev">+</span>
+        </button>
+        <div class="acc-body"><p>Paiement : <strong>espèces, virement ou PayPal</strong>. Tarifs non négociables.</p></div>
+      </div>
+      <div class="acc-card">
+        <button class="acc-head" onclick="toggleInfo(this)">
+          <span class="tiret">📍</span><span class="acc-title">Adresse</span><span class="acc-chev">+</span>
+        </button>
+        <div class="acc-body"><p>L'adresse exacte est communiquée <strong>une fois le rendez-vous pris en charge</strong>.</p></div>
+      </div>
+      <div class="acc-card">
+        <button class="acc-head" onclick="toggleInfo(this)">
+          <span class="tiret">👤</span><span class="acc-title">Compte</span><span class="acc-chev">+</span>
+        </button>
+        <div class="acc-body"><p>Obtenez l'accès de vos dernières prestations, et bien d'autres promos sur votre espace compte !</p></div>
+      </div>
+    </div>
+
+    <div class="social-links">
+      <p class="social-label">Retrouvez-moi sur</p>
+      <div class="social-row">
+        <a href="https://www.tiktok.com/@.hennabyhinda" target="_blank" rel="noopener">TikTok — .hennabyhinda</a>
+        <a href="https://instagram.com/hiiinart" target="_blank" rel="noopener">Instagram — @hiiinart</a>
+        <a href="https://snapchat.com/add/tnsya9.3" target="_blank" rel="noopener">Snapchat — tnsya9.3</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═════ TARIFS ═════ -->
+<section id="tarifs" class="reveal">
+  <div class="container">
+    <p class="sec-label">Prestations</p>
+    <h2 class="sec-title">Tarifs</h2>
+
+    <div class="tarif-row">
+      <span class="tarif-nom">Main simple</span>
+      <span class="tarif-dots"></span>
+      <span class="tarif-duree">15 min / main</span>
+      <span class="tarif-prix">5€</span>
+    </div>
+    <div class="tarif-row">
+      <span class="tarif-nom">Main chargée</span>
+      <span class="tarif-dots"></span>
+      <span class="tarif-duree">25 min / main</span>
+      <span class="tarif-prix">10€</span>
+    </div>
+    <div class="tarif-row">
+      <span class="tarif-nom">Avant-bras chargé</span>
+      <span class="tarif-dots"></span>
+      <span class="tarif-duree">40 min / bras</span>
+      <span class="tarif-prix">15€</span>
+    </div>
+    <div class="tarif-row">
+      <span class="tarif-nom">Bras entier</span>
+      <span class="tarif-dots"></span>
+      <span class="tarif-duree">1h10 / bras</span>
+      <span class="tarif-prix">25€</span>
+    </div>
+    <div class="tarif-row">
+      <span class="tarif-nom">Autre partie du corps</span>
+      <span class="tarif-dots"></span>
+      <span class="tarif-duree">durée variable</span>
+      <span class="tarif-prix" style="font-size:13px;">sur demande</span>
+    </div>
+    <div class="tarif-row">
+      <span class="tarif-nom">Événements &amp; groupes</span>
+      <span class="tarif-dots"></span>
+      <span class="tarif-duree">dès 6 personnes</span>
+      <span class="tarif-prix" style="font-size:13px;">sur devis</span>
+    </div>
+
+    <p class="tarif-note">Un doute sur le prix d'un modèle ? N'hésitez pas à me l'envoyer sur Instagram ! <a href="https://instagram.com/hiiinart" target="_blank" rel="noopener"><strong>@hiiinart</strong></a></p>
+    <p class="tarif-note small">Tarifs non négociables · Espèces, virement ou PayPal</p>
+  </div>
+</section>
+
+
+<!-- ═════ RDV ═════ -->
+<section id="rdv" class="reveal">
+  <div class="container">
+    <p class="sec-label">Réservation</p>
+    <h2 class="sec-title">Prendre rendez-vous</h2>
+
+    <!-- STEP 1 -->
+    <div class="step-head">
+      <span class="step-num">1</span>
+      <span class="step-name">Choisissez votre prestation</span>
+    </div>
+    <div class="presta-sel" id="prestaSel"></div>
+    <div class="total-bar" id="totalBar">
+      <span><strong>Total : 0€</strong></span>
+      <span class="tb-right">Durée estimée : —</span>
+    </div>
+
+    <!-- STEP 2 -->
+    <div class="step-head">
+      <span class="step-num">2</span>
+      <span class="step-name">Choisissez votre date &amp; votre heure</span>
+    </div>
+    <div class="cal-wrap">
+      <div class="cal-head">
+        <span class="cal-month" id="calMonth"></span>
+        <div class="cal-nav">
+          <button onclick="navMonth(-1)" aria-label="Mois précédent">←</button>
+          <button onclick="navMonth(1)" aria-label="Mois suivant">→</button>
+        </div>
+      </div>
+      <div class="cal-grid" id="calGrid"></div>
+      <div class="slots-wrap">
+        <p class="slots-title" id="slotsTitle">Créneaux disponibles</p>
+        <div class="slots-grid" id="slotsGrid">
+          <p class="slots-empty">Choisissez d'abord votre prestation puis un jour dans le calendrier.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- STEP 3 -->
+    <div class="step-head">
+      <span class="step-num">3</span>
+      <span class="step-name">Vos informations</span>
+    </div>
+    <div class="form-grid">
+      <div class="fg">
+        <label for="f-prenom">Prénom *</label>
+        <input type="text" id="f-prenom" autocomplete="given-name" />
+      </div>
+      <div class="fg">
+        <label for="f-nom">Nom *</label>
+        <input type="text" id="f-nom" autocomplete="family-name" />
+      </div>
+      <div class="fg">
+        <label for="f-tel">Téléphone (pour le SMS de confirmation) *</label>
+        <input type="tel" id="f-tel" placeholder="06 XX XX XX XX" autocomplete="tel" />
+      </div>
+      <div class="fg">
+        <label for="f-insta">Instagram (optionnel)</label>
+        <input type="text" id="f-insta" placeholder="@votrecompte" />
+      </div>
+      <div class="fg">
+        <label for="f-ref">Code de parrainage (optionnel)</label>
+        <input type="text" id="f-ref" placeholder="ex : SARAH-1234" style="text-transform:uppercase;" />
+      </div>
+      <div class="fg full">
+        <label for="f-msg">Message</label>
+        <textarea id="f-msg" placeholder="Une demande particulière ? Sentez-vous libre d'écrire ici !"></textarea>
+      </div>
+    </div>
+
+    <div class="recap" id="recapBox">Sélectionnez une prestation, une date et une heure pour voir le récapitulatif.</div>
+    <p class="form-err" id="formErr"></p>
+    <div class="submit-wrap">
+      <button class="btn btn-dark" onclick="confirmRdv()">Confirmer mon RDV</button>
+    </div>
+  </div>
+</section>
+
+<!-- ═════ FOOTER ═════ -->
+<footer>
+  <p class="f-logo">HIINART</p>
+  <div class="f-links">
+    <a href="https://instagram.com/hiiinart" target="_blank" rel="noopener">Instagram — @hiiinart</a>
+    <a href="https://www.tiktok.com/@.hennabyhinda" target="_blank" rel="noopener">TikTok — @.hennabyhinda</a>
+  </div>
+  <p class="f-contact">Un problème ? Contactez-moi sur Snapchat <strong>@tnsya9.3</strong> ou appelez-moi au <a href="tel:0789475075">07 89 47 50 75</a> !</p>
+  <p>© 2026 HiinArt — Épinay-sur-Seine · <a class="admin-link" onclick="openAdmin()">espace pro</a></p>
+</footer>
+
+<!-- ═════ CONFIRMATION MODAL ═════ -->
+<div class="modal-bg" id="confirmModal">
+  <div class="modal">
+    <h3>Rendez-vous pris en charge&nbsp;!</h3>
+    <p class="m-sub">La confirmation vous sera communiquée par SMS, la veille du rendez-vous.</p>
+
+    <div class="loyalty-card" id="loyaltyCard" style="display:none;">
+      <p class="loyalty-title">Coupon de fidélité</p>
+      <div class="loyalty-stamps" id="loyaltyStamps"></div>
+      <p class="loyalty-note">Votre coupon sera utilisé lorsque vous vous présenterez au rendez-vous 🤍</p>
+    </div>
+
+    <div class="addr-box">
+      <p class="a-label">Adresse du lieu</p>
+      <p class="a-main">6 rue de Nancy</p>
+      <p class="a-note">[ Portail du collège, pas le bâtiment en face ! ]</p>
+    </div>
+    <div class="m-recap" id="modalRecap"></div>
+    <p class="m-contact" style="font-size:12.5px;color:var(--muted);margin-top:14px;">Un problème ? Contactez-moi aussi par SMS ! <a href="sms:0789475075" style="color:inherit;text-decoration:underline;">07 89 47 50 75</a></p>
+    <button class="btn btn-dark" onclick="closeConfirm()">Fermer</button>
+  </div>
+</div>
+
+<!-- ═════ ADMIN MODAL ═════ -->
+<div class="modal-bg" id="adminModal">
+  <div class="modal" id="adminModalInner" style="max-width:520px;">
+    <div id="admLogin">
+      <h3>Espace pro</h3>
+      <p class="m-sub">Réservé à Hinda 🤍</p>
+      <div class="adm-field">
+        <label for="admPass">Mot de passe</label>
+        <input type="password" id="admPass" onkeydown="if(event.key==='Enter')admTryLogin()" />
+      </div>
+      <p class="form-err" id="admErr" style="margin-bottom:14px;"></p>
+      <div style="display:flex;gap:10px;justify-content:center;">
+        <button class="btn btn-ghost btn-small" onclick="closeAdmin()">Annuler</button>
+        <button class="btn btn-dark btn-small" onclick="admTryLogin()">Entrer</button>
+      </div>
+    </div>
+    <div id="admPanel" style="display:none;">
+      <h3>Espace pro</h3>
+
+      <div class="adm-tabs">
+        <button class="adm-tab-btn active" data-tab="creneaux" onclick="admSwitchTab('creneaux')">Créneaux</button>
+        <button class="adm-tab-btn" data-tab="nouveaux" onclick="admSwitchTab('nouveaux')">Nouveaux <span id="admNouveauxBadge" class="adm-badge" style="display:none;"></span></button>
+        <button class="adm-tab-btn" data-tab="reservations" onclick="admSwitchTab('reservations')">Réservations</button>
+        <button class="adm-tab-btn" data-tab="galerie" onclick="admSwitchTab('galerie')">Galerie</button>
+        <button class="adm-tab-btn" data-tab="promo" onclick="admSwitchTab('promo')">Promo</button>
+      </div>
+
+      <div class="adm-tab-page active" id="admTabCreneaux">
+        <div class="adm-field">
+          <label for="admDate">Jour</label>
+          <input type="date" id="admDate" onchange="admRender()" />
+        </div>
+
+        <p class="adm-section-title">Bloquer un créneau</p>
+        <div class="adm-row2">
+          <div class="adm-field">
+            <label for="admFrom">De</label>
+            <select id="admFrom"></select>
+          </div>
+          <div class="adm-field">
+            <label for="admTo">À</label>
+            <select id="admTo"></select>
+          </div>
+          <button class="btn btn-dark btn-small" onclick="admAddBlock()">Bloquer</button>
+        </div>
+        <div style="margin-top:10px;text-align:left;">
+          <button class="btn btn-ghost btn-small" onclick="admBlockDay()">Bloquer toute la journée</button>
+        </div>
+
+        <p class="adm-section-title">Créneaux bloqués ce jour</p>
+        <div id="admBlocks"></div>
+
+        <p class="adm-section-title">Réservations ce jour</p>
+        <div id="admBookings"></div>
+
+        <div class="adm-note" id="admNote"></div>
+      </div>
+
+      <div class="adm-tab-page" id="admTabNouveaux">
+        <div style="display:flex;gap:0;margin-bottom:12px;border:1px solid var(--line);">
+          <button class="btn btn-small" id="admNvSubBtn-new" onclick="admSwitchNouveauxSub('new')" style="flex:1;background:var(--ink);color:var(--bg);border-radius:0;">Nouvelles réservations !</button>
+          <button class="btn btn-small" id="admNvSubBtn-nogcal" onclick="admSwitchNouveauxSub('nogcal')" style="flex:1;background:transparent;color:var(--ink);border-radius:0;">Non enregistrées</button>
+        </div>
+        <div id="admNouveauxBookings" class="dash-scroll" style="max-height:60vh;"></div>
+      </div>
+
+      <div class="adm-tab-page" id="admTabReservations">
+        <p class="adm-section-title" style="margin-top:0;">Toutes mes réservations</p>
+        <div id="admAllBookings" class="dash-scroll" style="max-height:60vh;"></div>
+      </div>
+
+      <div class="adm-tab-page" id="admTabGalerie">
+        <p class="adm-section-title" style="margin-top:0;">Galerie — ajouter une photo</p>
+        <div class="adm-field">
+          <input type="file" id="admGalFile" accept="image/*,video/*" />
+        </div>
+        <div class="adm-field">
+          <label for="admGalCaption">Légende (optionnel)</label>
+          <input type="text" id="admGalCaption" />
+        </div>
+        <button class="btn btn-dark btn-small" onclick="admUploadGallery()">Ajouter à la galerie</button>
+        <p class="form-err" id="admGalErr"></p>
+        <div id="admGalList" style="margin-top:14px;"></div>
+      </div>
+
+      <div class="adm-tab-page" id="admTabPromo">
+        <p class="adm-section-title" style="margin-top:0;">Modifier la promo</p>
+        <div class="adm-field">
+          <label for="admPromoText">Texte de la promo (affiché dans « À savoir »)</label>
+          <textarea id="admPromoText" rows="2" style="width:100%;font-family:inherit;font-size:13px;padding:10px;border:1px solid var(--line);background:var(--bg);"></textarea>
+        </div>
+        <button class="btn btn-dark btn-small" onclick="admSavePromo()">Enregistrer la promo</button>
+        <p class="form-err" id="admPromoErr"></p>
+      </div>
+
+      <div style="margin-top:20px;">
+        <button class="btn btn-ghost btn-small" onclick="closeAdmin()">Fermer</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal-bg" id="editBookingModal">
+  <div class="modal" style="max-width:420px;" id="editBookingModalInner">
+    <h3>Modifier ma réservation</h3>
+    <p class="m-sub" id="editCurrentInfo" style="margin-bottom:14px;"></p>
+
+    <p class="adm-section-title" style="margin-top:0;">Nouvelle(s) prestation(s)</p>
+    <div id="editPrestaSel"></div>
+
+    <p class="adm-section-title">Nouvelle date</p>
+    <div class="adm-field">
+      <input type="date" id="editDate" onchange="onEditDateChange()" />
+    </div>
+
+    <p class="adm-section-title">Nouvel horaire</p>
+    <div class="adm-field">
+      <select id="editSlotSelect"><option value="">Choisis d'abord une prestation et une date</option></select>
+    </div>
+
+    <p class="form-err" id="editBookingErr"></p>
+
+    <div style="display:flex;gap:10px;justify-content:center;margin-top:18px;">
+      <button class="btn btn-ghost btn-small" onclick="closeEditBooking()">Annuler</button>
+      <button class="btn btn-dark btn-small" onclick="saveEditBooking()">Enregistrer</button>
+    </div>
+  </div>
+</div>
+
+<div class="modal-bg" id="accountModal">
+  <div class="modal" style="max-width:420px;" id="accountModalInner">
+    <div id="accLoggedOut">
+      <h3 id="accTitle">Connexion</h3>
+      <p class="m-sub" style="margin-bottom:18px;">La possession d'un compte vous donne accès à de nombreux avantages, comme des promos, des coupons de fidélité, et bien + !</p>
+      <div style="display:flex;gap:0;justify-content:center;margin-bottom:18px;border:1px solid var(--line);">
+        <button class="btn btn-small" id="tabLogin" onclick="accSwitchMode('login')" style="flex:1;background:var(--ink);color:var(--bg);border-radius:0;">Connexion</button>
+        <button class="btn btn-small" id="tabSignup" onclick="accSwitchMode('signup')" style="flex:1;background:transparent;color:var(--ink);border-radius:0;">S'enregistrer</button>
+      </div>
+      <div class="adm-field">
+        <label for="accUser">Pseudo</label>
+        <input type="text" id="accUser" />
+      </div>
+      <div class="adm-field">
+        <label for="accPass">Mot de passe</label>
+        <input type="password" id="accPass" onkeydown="if(event.key==='Enter')accSubmit()" />
+      </div>
+      <p class="form-err" id="accErr" style="margin-bottom:14px;"></p>
+      <div style="display:flex;gap:10px;justify-content:center;">
+        <button class="btn btn-ghost btn-small" onclick="closeAccount()">Annuler</button>
+        <button class="btn btn-dark btn-small" id="accSubmitBtn" onclick="accSubmit()">Se connecter</button>
+      </div>
+    </div>
+    <div id="accLoggedIn" style="display:none;">
+      <h3>Salut <span id="accWelcomeName"></span> 🤍</h3>
+      <div class="ref-box">
+        <p class="ref-label">Ton code de parrainage</p>
+        <div class="ref-code-row">
+          <span class="ref-code" id="refCode">—</span>
+          <button class="ref-copy" onclick="copyReferralCode()" id="refCopyBtn">Copier</button>
+        </div>
+        <p class="ref-hint">Envoie-le à une amie : une fois qu'elle s'est présentée à son RDV, tu reçois −50% sur ta 2ᵉ prestation !</p>
+      </div>
+
+      <div class="dash-stat">
+        <span class="dash-stat-num" id="dashRefCount">0</span>
+        <span class="dash-stat-label">parrainage(s)</span>
+      </div>
+
+      <p class="adm-section-title">Ton coupon de fidélité</p>
+      <div class="loyalty-card" id="dashLoyaltyCard">
+        <p class="loyalty-title">10 venues = une prestation offerte</p>
+        <div class="loyalty-stamps" id="dashLoyaltyStamps"></div>
+        <p class="loyalty-note" id="dashLoyaltyNote"></p>
+      </div>
+
+      <p class="adm-section-title">Tes prochaines réservations</p>
+      <div id="dashNextRdv" class="dash-box"></div>
+
+      <p class="adm-section-title">Historique de tes RDV</p>
+      <div id="dashHistory" class="dash-box dash-scroll"></div>
+
+      <p class="adm-section-title">Tes prestations</p>
+      <div id="dashPhotos" class="gal-grid" style="margin-top:10px;"></div>
+
+      <div style="display:flex;gap:10px;justify-content:center;margin-top:22px;">
+        <button class="btn btn-ghost btn-small" onclick="closeAccount()">Fermer</button>
+        <button class="btn btn-dark btn-small" onclick="accLogout()">Se déconnecter</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="gal-lightbox" id="galLightbox" onclick="if(event.target===this)closeLightbox()">
+  <button class="gal-lightbox-close" onclick="closeLightbox()">×</button>
+  <img id="galLightboxImg" src="" />
+  <video id="galLightboxVid" controls style="display:none;max-width:100%;max-height:85vh;"></video>
+</div>
+
+<div class="acc-toast" id="accToast"></div>
+
+<script>
+/* ════════════════════════════════════════
+   CONFIG — modifiable facilement
+════════════════════════════════════════ */
+const CONFIG = {
+  email: "hindabguirpro@gmail.com",   // reçoit les notifs de RDV
+  adminPassword: "charli_12",
+  openMin: 15 * 60,                    // ouverture : 15h00
+  closeMin: 20 * 60 + 30,              // fermeture : 20h30
+  adminStep: 30,                       // granularité des blocages admin
+  minNoticeMin: 180,                    // réservation min. 3h avant
+  // ↓ pour la synchro en ligne (étape suivante, optionnel)
+  supabaseUrl: "https://rkddelksccyotdhctbjd.supabase.co",
+  supabaseKey: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InJrZGRlbGtzY2N5b3RkaGN0YmpkIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODI4MDc2MzQsImV4cCI6MjA5ODM4MzYzNH0._UxXG0rpLikgoYRzcd19nzJ9z8safzIgrrTHiDl88R8"
+};
+
+const PRESTAS = [
+  { id:"ms",    nom:"Main simple",          prix:5,    duree:15, unit:"main",       max:2 },
+  { id:"mc",    nom:"Main chargée",         prix:10,   duree:25, unit:"main",       max:2 },
+  { id:"ab",    nom:"Avant-bras chargé",    prix:15,   duree:40, unit:"avant-bras", max:2 },
+  { id:"be",    nom:"Bras entier",          prix:25,   duree:70, unit:"bras",       max:2 },
+  { id:"autre", nom:"Autre partie du corps", prix:null, duree:45, surDemande:true,  max:1 }
+];
+const AUTRE_PARTS = [
+  { id:"epaule", nom:"Épaule" },
+  { id:"bras2",  nom:"Bras" },
+  { id:"ventre", nom:"Ventre" },
+  { id:"torse",  nom:"Torse" },
+  { id:"dos",    nom:"Dos" }
+];
+
+/* ════════════════════════════════════════
+   STOCKAGE (local, avec repli mémoire)
+════════════════════════════════════════ */
+const store = (() => {
+  let mem = {}; let ok = true;
+  try { localStorage.setItem("__t","1"); localStorage.removeItem("__t"); }
+  catch(e){ ok = false; }
+  return {
+    get(k){ try { return ok ? JSON.parse(localStorage.getItem(k) || "null") : (mem[k] ?? null); } catch(e){ return mem[k] ?? null; } },
+    set(k,v){ try { if(ok) localStorage.setItem(k, JSON.stringify(v)); else mem[k]=v; } catch(e){ mem[k]=v; } }
+  };
+})();
+
+function sbOn(){ return CONFIG.supabaseUrl && CONFIG.supabaseKey; }
+async function sbFetch(path, opts = {}){
+  const headers = {
+    "apikey": CONFIG.supabaseKey,
+    "Authorization": "Bearer " + CONFIG.supabaseKey,
+    "Content-Type": "application/json",
+    "Prefer": "return=representation",
+    ...(opts.headers || {})
+  };
+  const res = await fetch(CONFIG.supabaseUrl + "/rest/v1/" + path, { ...opts, headers });
+  if (opts.method === "DELETE") return true;
+  const data = await res.json();
+  if (!res.ok){
+    const msg = (data && (data.message || data.error_description || data.hint)) || `Erreur ${res.status}`;
+    throw new Error(msg);
+  }
+  return data;
+}
+
+const DB = {
+  async getBlocked(date){
+    if (sbOn()){
+      try { return await sbFetch(`blocked?date=eq.${date}&select=*`); } catch(e){ return []; }
+    }
+    const all = store.get("hiinart_blocked") || {};
+    return all[date] || [];
+  },
+  async addBlocked(date, start, end){
+    if (sbOn()){
+      await sbFetch("blocked", { method:"POST", body: JSON.stringify([{ date, start, end }]) });
+      return;
+    }
+    const all = store.get("hiinart_blocked") || {};
+    if (!all[date]) all[date] = [];
+    all[date].push({ id: Date.now() + "" + Math.floor(Math.random()*999), date, start, end });
+    store.set("hiinart_blocked", all);
+  },
+  async removeBlocked(date, id){
+    if (sbOn()){
+      await sbFetch(`blocked?id=eq.${id}`, { method:"DELETE" });
+      return;
+    }
+    const all = store.get("hiinart_blocked") || {};
+    all[date] = (all[date] || []).filter(b => String(b.id) !== String(id));
+    store.set("hiinart_blocked", all);
+  },
+  async getBookings(date){
+    if (sbOn()){
+      try { return await sbFetch(`bookings?date=eq.${date}&select=*`); } catch(e){ return []; }
+    }
+    const all = store.get("hiinart_bookings") || {};
+    return all[date] || [];
+  },
+  async getAllBookings(){
+    if (sbOn()){
+      try { return await sbFetch(`bookings?select=*&order=date.asc,start.asc`); } catch(e){ return []; }
+    }
+    const all = store.get("hiinart_bookings") || {};
+    let out = [];
+    Object.values(all).forEach(arr => out = out.concat(arr));
+    out.sort((a,b) => (a.date+a.start) > (b.date+b.start) ? 1 : -1);
+    return out;
+  },
+  async addBooking(b){
+    if (sbOn()){
+      await sbFetch("bookings", { method:"POST", body: JSON.stringify([b]) });
+      return;
+    }
+    const all = store.get("hiinart_bookings") || {};
+    if (!all[b.date]) all[b.date] = [];
+    all[b.date].push({ ...b, id: Date.now() + "" + Math.floor(Math.random()*999) });
+    store.set("hiinart_bookings", all);
+  },
+  async removeBooking(date, id){
+    if (sbOn()){
+      await sbFetch(`bookings?id=eq.${id}`, { method:"DELETE" });
+      return;
+    }
+    const all = store.get("hiinart_bookings") || {};
+    all[date] = (all[date] || []).filter(b => String(b.id) !== String(id));
+    store.set("hiinart_bookings", all);
+  },
+  async updateBooking(id, patch){
+    if (sbOn()){
+      await sbFetch(`bookings?id=eq.${id}`, { method:"PATCH", body: JSON.stringify(patch) });
+      return;
+    }
+    const all = store.get("hiinart_bookings") || {};
+    Object.keys(all).forEach(date => {
+      all[date] = (all[date] || []).map(b => String(b.id) === String(id) ? { ...b, ...patch } : b);
+    });
+    store.set("hiinart_bookings", all);
+  },
+  async getGallery(){
+    if (sbOn()){
+      try { return await sbFetch(`gallery?select=*&order=position.asc,created_at.desc`); } catch(e){ return []; }
+    }
+    return store.get("hiinart_gallery") || [];
+  },
+  async addGalleryImage(image, caption, type){
+    if (sbOn()){
+      let nextPos = 1;
+      try {
+        const existing = await sbFetch(`gallery?select=position&order=position.desc&limit=1`);
+        nextPos = (existing && existing.length ? existing[0].position : 0) + 1;
+      } catch(e){}
+      await sbFetch("gallery", { method:"POST", body: JSON.stringify([{ image, caption, type: type || "image", position: nextPos }]) });
+      return;
+    }
+    const all = store.get("hiinart_gallery") || [];
+    all.unshift({ id: Date.now()+"", image, caption, type: type || "image", created_at: new Date().toISOString() });
+    store.set("hiinart_gallery", all);
+  },
+  async setGalleryPosition(id, position){
+    if (sbOn()){
+      await sbFetch(`gallery?id=eq.${id}`, { method:"PATCH", body: JSON.stringify({ position }) });
+      return;
+    }
+  },
+  async removeGalleryImage(id){
+    if (sbOn()){
+      await sbFetch(`gallery?id=eq.${id}`, { method:"DELETE" });
+      return;
+    }
+    let all = store.get("hiinart_gallery") || [];
+    all = all.filter(g => String(g.id) !== String(id));
+    store.set("hiinart_gallery", all);
+  },
+  async getReviews(){
+    if (sbOn()){
+      try { return await sbFetch(`reviews?select=*&order=created_at.desc`); } catch(e){ return []; }
+    }
+    return store.get("hiinart_reviews") || [];
+  },
+  async addReview(username, rating, comment){
+    if (sbOn()){
+      await sbFetch("reviews", { method:"POST", body: JSON.stringify([{ username, rating, comment }]) });
+      return;
+    }
+    const all = store.get("hiinart_reviews") || [];
+    all.unshift({ id: Date.now()+"", username, rating, comment, created_at: new Date().toISOString() });
+    store.set("hiinart_reviews", all);
+  },
+  async removeReview(id){
+    if (sbOn()){
+      await sbFetch(`reviews?id=eq.${id}`, { method:"DELETE" });
+      return;
+    }
+    let all = store.get("hiinart_reviews") || [];
+    all = all.filter(r => String(r.id) !== String(id));
+    store.set("hiinart_reviews", all);
+  },
+  async getSetting(key){
+    if (sbOn()){
+      try {
+        const rows = await sbFetch(`settings?key=eq.${key}&select=value`);
+        return rows && rows.length ? rows[0].value : null;
+      } catch(e){ return null; }
+    }
+    const all = store.get("hiinart_settings") || {};
+    return all[key] ?? null;
+  },
+  async setSetting(key, value){
+    if (sbOn()){
+      await sbFetch(`settings`, {
+        method:"POST",
+        headers:{ "Prefer":"resolution=merge-duplicates,return=representation" },
+        body: JSON.stringify([{ key, value }])
+      });
+      return;
+    }
+    const all = store.get("hiinart_settings") || {};
+    all[key] = value;
+    store.set("hiinart_settings", all);
+  },
+  async getUserBookings(userId){
+    if (sbOn()){
+      try { return await sbFetch(`bookings?user_id=eq.${userId}&select=*&order=date.asc`); } catch(e){ return []; }
+    }
+    const all = store.get("hiinart_bookings") || {};
+    let out = [];
+    Object.values(all).forEach(arr => out = out.concat(arr.filter(b => String(b.user_id) === String(userId))));
+    return out;
+  },
+  async getAttendedCount(userId){
+    if (!userId) return 0;
+    if (sbOn()){
+      try {
+        const rows = await sbFetch(`bookings?user_id=eq.${userId}&attended=eq.true&select=id`);
+        return rows ? rows.length : 0;
+      } catch(e){ return 0; }
+    }
+    return 0;
+  },
+  async setAttended(id, value){
+    if (sbOn()){
+      await sbFetch(`bookings?id=eq.${id}`, { method:"PATCH", body: JSON.stringify({ attended: value }) });
+      return;
+    }
+  },
+  async getReferralCount(code){
+    if (!code) return 0;
+    if (sbOn()){
+      try {
+        const rows = await sbFetch(`bookings?referral_code=eq.${encodeURIComponent(code)}&attended=eq.true&select=id`);
+        return rows ? rows.length : 0;
+      } catch(e){ return 0; }
+    }
+    const all = store.get("hiinart_bookings") || {};
+    let count = 0;
+    Object.values(all).forEach(arr => count += arr.filter(b => b.referral_code === code && b.attended).length);
+    return count;
+  },
+  async getClientPhotos(userId){
+    if (sbOn()){
+      try { return await sbFetch(`client_photos?user_id=eq.${userId}&select=*&order=created_at.desc`); } catch(e){ return []; }
+    }
+    const all = store.get("hiinart_client_photos") || {};
+    return all[userId] || [];
+  },
+  async addClientPhoto(userId, image, caption){
+    if (sbOn()){
+      await sbFetch("client_photos", { method:"POST", body: JSON.stringify([{ user_id: userId, image, caption }]) });
+      return;
+    }
+    const all = store.get("hiinart_client_photos") || {};
+    if (!all[userId]) all[userId] = [];
+    all[userId].unshift({ id: Date.now()+"", image, caption, created_at: new Date().toISOString() });
+    store.set("hiinart_client_photos", all);
+  },
+  async removeClientPhoto(id){
+    if (sbOn()){
+      await sbFetch(`client_photos?id=eq.${id}`, { method:"DELETE" });
+      return;
+    }
+  }
+};
+
+/* ════════════════════════════════════════
+   COMPTE CLIENTE
+════════════════════════════════════════ */
+function toggleNav(){
+  document.getElementById("navMenu").classList.toggle("open");
+}
+function closeNav(){
+  document.getElementById("navMenu").classList.remove("open");
+}
+
+function toggleInfo(btn){
+  const card = btn.closest(".acc-card");
+  const body = card.querySelector(".acc-body");
+  const isOpen = card.classList.contains("open");
+  if (isOpen){
+    card.classList.remove("open");
+    body.style.maxHeight = null;
+  } else {
+    card.classList.add("open");
+    body.style.maxHeight = body.scrollHeight + "px";
+  }
+}
+
+function makeReferralCode(username){
+  const clean = username.toUpperCase().replace(/[^A-Z0-9]/g, "").slice(0, 8) || "CLIENTE";
+  const nums = Math.floor(1000 + Math.random() * 9000);
+  return `${clean}-${nums}`;
+}
+function makeReferralCodeFromId(username, id){
+  const clean = username.toUpperCase().replace(/[^A-Z0-9]/g, "").slice(0, 8) || "CLIENTE";
+  const nums = (1000 + (Number(id) % 9000));
+  return `${clean}-${nums}`;
+}
+
+let accMode = "login";
+function accSwitchMode(mode){
+  accMode = mode;
+  document.getElementById("accErr").textContent = "";
+  const isLogin = mode === "login";
+  document.getElementById("tabLogin").style.background = isLogin ? "var(--ink)" : "transparent";
+  document.getElementById("tabLogin").style.color = isLogin ? "var(--bg)" : "var(--ink)";
+  document.getElementById("tabSignup").style.background = !isLogin ? "var(--ink)" : "transparent";
+  document.getElementById("tabSignup").style.color = !isLogin ? "var(--bg)" : "var(--ink)";
+  document.getElementById("accTitle").textContent = isLogin ? "Connexion" : "S'enregistrer";
+  document.getElementById("accSubmitBtn").textContent = isLogin ? "Se connecter" : "Créer mon compte";
+}
+
+function getSession(){ return store.get("hiinart_session"); }
+function setSession(s){ store.set("hiinart_session", s); }
+
+function updateAccountLink(){
+  const s = getSession();
+  const link = document.getElementById("accountLink");
+  const heroBtn = document.getElementById("heroAccountBtn");
+  if (link) link.textContent = s ? s.username : "Mon compte";
+  if (heroBtn) heroBtn.textContent = s ? s.username : "Mon compte";
+}
+
+async function getOrCreateReferralCode(s){
+  let code = s.referral_code;
+  if (!code && sbOn()){
+    try {
+      const rows = await sbFetch(`users?id=eq.${s.id}&select=referral_code`);
+      code = rows && rows[0] && rows[0].referral_code;
+      if (!code){
+        code = makeReferralCodeFromId(s.username, s.id);
+        await sbFetch(`users?id=eq.${s.id}`, { method:"PATCH", body: JSON.stringify({ referral_code: code }) });
+      }
+      s.referral_code = code;
+      setSession(s);
+    } catch(e){
+      console.error("Erreur code parrainage :", e.message);
+    }
+  }
+  return code;
+}
+
+async function renderPromoReferral(){
+  const s = getSession();
+  const box = document.getElementById("promoRefBox");
+  const hint = document.getElementById("promoRefLoginHint");
+  if (!box || !hint) return;
+  if (s){
+    box.style.display = "block";
+    hint.style.display = "none";
+    document.getElementById("promoRefCode").textContent = "...";
+    const code = await getOrCreateReferralCode(s);
+    document.getElementById("promoRefCode").textContent = code || "—";
+  } else {
+    box.style.display = "none";
+    hint.style.display = "block";
+  }
+  // recalc accordion height if already open
+  const card = box.closest(".acc-card");
+  if (card && card.classList.contains("open")){
+    const body = card.querySelector(".acc-body");
+    body.style.maxHeight = body.scrollHeight + "px";
+  }
+}
+function copyPromoReferralCode(){
+  const code = document.getElementById("promoRefCode").textContent;
+  if (!code || code === "—" || code === "...") return;
+  navigator.clipboard.writeText(code).then(() => {
+    const btn = document.getElementById("promoRefCopyBtn");
+    const old = btn.textContent;
+    btn.textContent = "Copié !";
+    setTimeout(() => btn.textContent = old, 1500);
+  });
+}
+
+async function openAccount(){
+  const s = getSession();
+  document.getElementById("accountModal").classList.add("open");
+  document.getElementById("accErr").textContent = "";
+  if (s){
+    document.getElementById("accountModalInner").style.maxWidth = "560px";
+    document.getElementById("accLoggedOut").style.display = "none";
+    document.getElementById("accLoggedIn").style.display = "block";
+    document.getElementById("accWelcomeName").textContent = s.username;
+    document.getElementById("refCode").textContent = "...";
+    const code = await getOrCreateReferralCode(s);
+    document.getElementById("refCode").textContent = code || "—";
+    loadDashboard(s, code);
+  } else {
+    document.getElementById("accountModalInner").style.maxWidth = "420px";
+    document.getElementById("accLoggedOut").style.display = "block";
+    document.getElementById("accLoggedIn").style.display = "none";
+    document.getElementById("accUser").value = "";
+    document.getElementById("accPass").value = "";
+    accSwitchMode("login");
+  }
+}
+
+async function loadDashboard(s, code){
+  // parrainages
+  document.getElementById("dashRefCount").textContent = "...";
+  DB.getReferralCount(code).then(n => {
+    document.getElementById("dashRefCount").textContent = n;
+  });
+
+  // coupon de fidélité
+  DB.getAttendedCount(s.id).then(count => {
+    const progress = count % 10;
+    buildLoyaltyStamps(document.getElementById("dashLoyaltyStamps"), progress);
+    const cardEl = document.getElementById("dashLoyaltyCard");
+    const existingBanner = cardEl.querySelector(".loyalty-reward-banner");
+    if (existingBanner) existingBanner.remove();
+    const noteEl = document.getElementById("dashLoyaltyNote");
+    if (count > 0 && count % 10 === 0){
+      const banner = document.createElement("p");
+      banner.className = "loyalty-reward-banner";
+      banner.textContent = "🎁 Prestation offerte !";
+      cardEl.querySelector(".loyalty-stamps").insertAdjacentElement("afterend", banner);
+      noteEl.textContent = "Préviens Hinda à ton prochain RDV pour en profiter 🤍";
+    } else {
+      noteEl.textContent = `${progress}/10 — un tampon est ajouté à chaque venue confirmée.`;
+    }
+  });
+
+  // RDV (next + history)
+  const nextEl = document.getElementById("dashNextRdv");
+  const histEl = document.getElementById("dashHistory");
+  nextEl.innerHTML = `<p class="dash-empty">Chargement…</p>`;
+  histEl.innerHTML = "";
+  const bookings = await DB.getUserBookings(s.id);
+  const today = toDateStr(new Date());
+  const upcoming = bookings.filter(b => b.date >= today).sort((a,b)=>a.date.localeCompare(b.date));
+  const past = bookings.filter(b => b.date < today).sort((a,b)=>b.date.localeCompare(a.date));
+
+  if (upcoming.length){
+    nextEl.innerHTML = "";
+    upcoming.forEach((b, i) => {
+      const card = document.createElement("div");
+      card.className = "dash-next";
+      card.style.marginBottom = "10px";
+      card.innerHTML = `<div class="dash-date">${frDate(b.date)} · ${fmtMin(Number(b.start))}</div>
+        <div class="dash-presta">${b.prestas || ""}</div>`;
+      const btn = document.createElement("button");
+      btn.className = "btn btn-ghost btn-small";
+      btn.style.marginTop = "8px";
+      btn.textContent = "Modifier ma réservation";
+      btn.onclick = () => openEditBooking(b);
+      card.appendChild(btn);
+      nextEl.appendChild(card);
+    });
+  } else {
+    nextEl.innerHTML = `<p class="dash-empty">Aucun rendez-vous à venir.</p>`;
+  }
+
+  if (past.length){
+    histEl.innerHTML = "";
+    past.forEach(b => {
+      const div = document.createElement("div");
+      div.className = "dash-item";
+      div.innerHTML = `<span class="dash-date">${frDate(b.date)}</span><span class="dash-presta">${b.prestas || ""}</span>`;
+      histEl.appendChild(div);
+    });
+  } else {
+    histEl.innerHTML = `<p class="dash-empty">Pas encore de RDV passé.</p>`;
+  }
+
+  // photos
+  const photosEl = document.getElementById("dashPhotos");
+  photosEl.innerHTML = `<p class="dash-empty">Chargement…</p>`;
+  const photos = await DB.getClientPhotos(s.id);
+  if (!photos.length){
+    photosEl.innerHTML = `<p class="dash-empty">Aucune photo ajoutée pour le moment.</p>`;
+  } else {
+    photosEl.innerHTML = "";
+    photos.forEach(p => {
+      const item = document.createElement("div");
+      item.className = "gal-item";
+      item.onclick = () => openLightbox(p.image, false);
+      const img = document.createElement("img");
+      img.src = p.image;
+      item.appendChild(img);
+      photosEl.appendChild(item);
+    });
+  }
+}
+function copyReferralCode(){
+  const code = document.getElementById("refCode").textContent;
+  if (!code || code === "—" || code === "...") return;
+  navigator.clipboard.writeText(code).then(() => {
+    const btn = document.getElementById("refCopyBtn");
+    const old = btn.textContent;
+    btn.textContent = "Copié !";
+    setTimeout(() => btn.textContent = old, 1500);
+  });
+}
+function closeAccount(){
+  document.getElementById("accountModal").classList.remove("open");
+}
+function accLogout(){
+  setSession(null);
+  updateAccountLink();
+  closeAccount();
+  renderReviews();
+  renderPromoReferral();
+}
+
+function showToast(msg){
+  const t = document.getElementById("accToast");
+  t.textContent = msg;
+  t.classList.add("show");
+  setTimeout(() => t.classList.remove("show"), 2200);
+}
+
+async function accSubmit(){
+  const username = document.getElementById("accUser").value.trim();
+  const password = document.getElementById("accPass").value;
+  const errEl = document.getElementById("accErr");
+  errEl.textContent = "";
+  if (!username || !password){ errEl.textContent = "Remplis les deux champs."; return; }
+  if (!sbOn()){ errEl.textContent = "Connexion indisponible pour le moment."; return; }
+
+  const btn = document.getElementById("accSubmitBtn");
+  btn.disabled = true;
+  try {
+    const existing = await sbFetch(`users?username=eq.${encodeURIComponent(username)}&select=*`);
+    let successMsg = "";
+    if (accMode === "login"){
+      if (!existing || !existing.length){
+        errEl.textContent = "Ce compte n'existe pas. Clique sur « S'enregistrer ».";
+        btn.disabled = false; return;
+      }
+      if (existing[0].password !== password){
+        errEl.textContent = "Mot de passe incorrect.";
+        btn.disabled = false; return;
+      }
+      setSession({ id: existing[0].id, username: existing[0].username, referral_code: existing[0].referral_code });
+      successMsg = "Connexion réussie !";
+    } else {
+      if (existing && existing.length){
+        errEl.textContent = "Ce pseudo est déjà pris. Clique sur « Connexion ».";
+        btn.disabled = false; return;
+      }
+      const code = makeReferralCode(username);
+      const created = await sbFetch("users", { method:"POST", body: JSON.stringify([{ username, password, referral_code: code }]) });
+      setSession({ id: created[0].id, username: created[0].username, referral_code: created[0].referral_code });
+      successMsg = "Compte créé avec succès !";
+    }
+    updateAccountLink();
+    closeAccount();
+    showToast(successMsg);
+    renderReviews();
+    renderPromoReferral();
+  } catch(e){
+    errEl.textContent = "Erreur : " + e.message;
+  }
+  btn.disabled = false;
+}
+
+/* ════════════════════════════════════════
+   GALERIE
+════════════════════════════════════════ */
+async function renderGallery(){
+  const grid = document.getElementById("galGrid");
+  if (!grid) return;
+  const items = await DB.getGallery();
+  if (!items.length){
+    grid.innerHTML = `<p class="gal-empty">Aucune photo pour le moment, revenez bientôt !</p>`;
+    return;
+  }
+  grid.innerHTML = "";
+  items.forEach(it => {
+    const isVideo = it.type === "video";
+    const item = document.createElement("div");
+    item.className = "gal-item";
+    item.onclick = () => openLightbox(it.image, isVideo);
+    if (isVideo){
+      const vid = document.createElement("video");
+      vid.src = it.image;
+      vid.muted = true;
+      item.appendChild(vid);
+      const play = document.createElement("div");
+      play.className = "gal-play";
+      play.textContent = "▶";
+      item.appendChild(play);
+    } else {
+      const img = document.createElement("img");
+      img.src = it.image;
+      img.alt = it.caption || "Réalisation HiinArt";
+      item.appendChild(img);
+    }
+    if (it.caption){
+      const cap = document.createElement("div");
+      cap.className = "gal-caption";
+      cap.textContent = it.caption;
+      item.appendChild(cap);
+    }
+    grid.appendChild(item);
+  });
+}
+function openLightbox(src, isVideo){
+  const imgEl = document.getElementById("galLightboxImg");
+  const vidEl = document.getElementById("galLightboxVid");
+  if (isVideo){
+    imgEl.style.display = "none";
+    vidEl.style.display = "block";
+    vidEl.src = src;
+    vidEl.play().catch(()=>{});
+  } else {
+    vidEl.pause();
+    vidEl.style.display = "none";
+    imgEl.style.display = "block";
+    imgEl.src = src;
+  }
+  document.getElementById("galLightbox").classList.add("open");
+}
+function closeLightbox(){
+  document.getElementById("galLightbox").classList.remove("open");
+  document.getElementById("galLightboxVid").pause();
+}
+
+/* ════════════════════════════════════════
+   AVIS
+════════════════════════════════════════ */
+let selectedRating = 0;
+function renderStarPicker(){
+  const wrap = document.getElementById("starPicker");
+  if (!wrap) return;
+  wrap.innerHTML = "";
+  for (let i = 1; i <= 5; i++){
+    const s = document.createElement("span");
+    s.textContent = "★";
+    s.onclick = () => { selectedRating = i; renderStarPicker(); };
+    if (i <= selectedRating) s.classList.add("active");
+    wrap.appendChild(s);
+  }
+}
+
+async function renderReviews(){
+  const list = document.getElementById("reviewsList");
+  if (!list) return;
+  const reviews = await DB.getReviews();
+  const s = getSession();
+  if (!reviews.length){
+    list.innerHTML = `<p class="gal-empty">Aucun avis pour le moment.</p>`;
+  } else {
+    list.innerHTML = "";
+    reviews.forEach(r => {
+      const div = document.createElement("div");
+      div.className = "review-item";
+      const isMine = s && s.username === r.username;
+      const canDelete = isMine || admLogged;
+      div.innerHTML = `
+        <div class="review-top">
+          <div>
+            <div class="review-stars">${"★".repeat(r.rating)}${"☆".repeat(5-r.rating)}</div>
+            <div class="review-user">${r.username}</div>
+          </div>
+          ${canDelete ? `<div class="review-menu-wrap">
+            <button class="review-menu-btn">⋯</button>
+            <div class="review-menu">
+              <button class="review-del-btn">${isMine ? "Supprimer mon avis" : "Supprimer (admin)"}</button>
+            </div>
+          </div>` : ""}
+        </div>
+        <div class="review-text">${r.comment}</div>`;
+
+      if (canDelete){
+        div.querySelector(".review-menu-btn").addEventListener("click", function(e){
+          e.stopPropagation();
+          toggleReviewMenu(this);
+        });
+        div.querySelector(".review-del-btn").addEventListener("click", () => deleteReview(r.id));
+      }
+      list.appendChild(div);
+    });
+  }
+  document.getElementById("reviewFormWrap").style.display = s ? "block" : "none";
+  document.getElementById("reviewLoginHint").style.display = s ? "none" : "block";
+}
+
+function toggleReviewMenu(btn){
+  const menu = btn.nextElementSibling;
+  const wasOpen = menu.classList.contains("open");
+  document.querySelectorAll(".review-menu.open").forEach(m => m.classList.remove("open"));
+  if (!wasOpen) menu.classList.add("open");
+}
+document.addEventListener("click", (e) => {
+  if (!e.target.closest(".review-menu-wrap")){
+    document.querySelectorAll(".review-menu.open").forEach(m => m.classList.remove("open"));
+  }
+});
+
+async function deleteReview(id){
+  if (!confirm("Supprimer cet avis ?")) return;
+  try {
+    await DB.removeReview(id);
+  } catch(err){
+    alert("Erreur : " + err.message);
+    return;
+  }
+  showToast("Avis supprimé.");
+  renderReviews();
+}
+
+async function submitReview(){
+  const s = getSession();
+  const errEl = document.getElementById("reviewErr");
+  errEl.textContent = "";
+  if (!s){ errEl.textContent = "Connecte-toi d'abord."; return; }
+  const text = document.getElementById("reviewText").value.trim();
+  if (!selectedRating){ errEl.textContent = "Choisis une note."; return; }
+  if (!text){ errEl.textContent = "Écris un petit avis."; return; }
+  await DB.addReview(s.username, selectedRating, text);
+  document.getElementById("reviewText").value = "";
+  selectedRating = 0;
+  renderStarPicker();
+  showToast("Avis publié, merci ! 🤍");
+  renderReviews();
+}
+
+function admAddClientPhoto(userId, prenom){
+  const input = document.createElement("input");
+  input.type = "file";
+  input.accept = "image/*";
+  input.onchange = () => {
+    const file = input.files[0];
+    if (!file) return;
+    if (file.size > 4 * 1024 * 1024){ alert("Photo trop lourde (max 4 Mo)."); return; }
+    const reader = new FileReader();
+    reader.onload = async () => {
+      try {
+        await DB.addClientPhoto(userId, reader.result, "");
+      } catch(err){ alert("Erreur : " + err.message); return; }
+      showToast(`Photo ajoutée à la fiche de ${prenom || "la cliente"} !`);
+    };
+    reader.readAsDataURL(file);
+  };
+  input.click();
+}
+
+async function admUploadGallery(){
+  const fileInput = document.getElementById("admGalFile");
+  const caption = document.getElementById("admGalCaption").value.trim();
+  const errEl = document.getElementById("admGalErr");
+  errEl.textContent = "";
+  const file = fileInput.files[0];
+  if (!file){ errEl.textContent = "Choisis une photo ou vidéo."; return; }
+  const isVideo = file.type.startsWith("video/");
+  const maxSize = isVideo ? 15 * 1024 * 1024 : 4 * 1024 * 1024;
+  if (file.size > maxSize){ errEl.textContent = isVideo ? "Vidéo trop lourde (max 15 Mo)." : "Photo trop lourde (max 4 Mo)."; return; }
+  const reader = new FileReader();
+  reader.onload = async () => {
+    try {
+      await DB.addGalleryImage(reader.result, caption, isVideo ? "video" : "image");
+    } catch(err){ errEl.textContent = "Erreur : " + err.message; return; }
+    fileInput.value = "";
+    document.getElementById("admGalCaption").value = "";
+    renderGallery();
+    admRenderGalleryList();
+    showToast(isVideo ? "Vidéo ajoutée à la galerie !" : "Photo ajoutée à la galerie !");
+  };
+  reader.readAsDataURL(file);
+}
+
+async function loadPromo(){
+  const txt = await DB.getSetting("promo_text");
+  if (txt){
+    document.getElementById("promoText").innerHTML = txt;
+  }
+}
+async function admLoadPromo(){
+  const txt = await DB.getSetting("promo_text");
+  const el = document.getElementById("admPromoText");
+  el.value = txt || document.getElementById("promoText").innerHTML.replace(/<\/?strong>/g,"");
+}
+async function admSavePromo(){
+  const val = document.getElementById("admPromoText").value.trim();
+  const errEl = document.getElementById("admPromoErr");
+  errEl.textContent = "";
+  if (!val){ errEl.textContent = "Écris un texte."; return; }
+  try {
+    await DB.setSetting("promo_text", val);
+  } catch(err){ errEl.textContent = "Erreur : " + err.message; return; }
+  document.getElementById("promoText").innerHTML = val;
+  showToast("Promo mise à jour !");
+}
+
+async function admRenderGalleryList(){
+  const wrap = document.getElementById("admGalList");
+  if (!wrap) return;
+  const items = await DB.getGallery();
+  wrap.innerHTML = "";
+  items.forEach((it, idx) => {
+    const div = document.createElement("div");
+    div.className = "adm-item";
+    const thumb = it.type === "video"
+      ? `<span style="display:inline-flex;align-items:center;justify-content:center;width:34px;height:34px;background:var(--beige);font-size:11px;">▶</span>`
+      : `<img src="${it.image}" style="width:34px;height:34px;object-fit:cover;" />`;
+    div.innerHTML = `<span style="display:flex;align-items:center;gap:8px;">
+      ${thumb}
+      ${it.caption || "(sans légende)"}</span>`;
+
+    const reorderWrap = document.createElement("span");
+    reorderWrap.style.cssText = "display:flex;gap:4px;margin-left:auto;margin-right:8px;";
+    const upBtn = document.createElement("button");
+    upBtn.textContent = "↑"; upBtn.className = "btn btn-ghost btn-small"; upBtn.style.padding = "4px 8px";
+    upBtn.disabled = idx === 0;
+    upBtn.onclick = () => admSwapGalleryOrder(items, idx, idx - 1);
+    const downBtn = document.createElement("button");
+    downBtn.textContent = "↓"; downBtn.className = "btn btn-ghost btn-small"; downBtn.style.padding = "4px 8px";
+    downBtn.disabled = idx === items.length - 1;
+    downBtn.onclick = () => admSwapGalleryOrder(items, idx, idx + 1);
+    reorderWrap.appendChild(upBtn);
+    reorderWrap.appendChild(downBtn);
+    div.appendChild(reorderWrap);
+
+    const x = document.createElement("button");
+    x.className = "x"; x.textContent = "×"; x.title = "Supprimer";
+    x.addEventListener("click", async () => {
+      if (confirm("Supprimer cette photo de la galerie ?")){
+        try {
+          await DB.removeGalleryImage(it.id);
+        } catch(err){ alert("Erreur : " + err.message); return; }
+        renderGallery();
+        admRenderGalleryList();
+      }
+    });
+    div.appendChild(x);
+    wrap.appendChild(div);
+  });
+}
+
+async function admSwapGalleryOrder(items, i, j){
+  try {
+    for (let k = 0; k < items.length; k++){
+      await DB.setGalleryPosition(items[k].id, k);
+    }
+    const a = items[i], b = items[j];
+    await DB.setGalleryPosition(a.id, j);
+    await DB.setGalleryPosition(b.id, i);
+  } catch(err){
+    alert("Erreur : " + err.message);
+    return;
+  }
+  renderGallery();
+  admRenderGalleryList();
+}
+
+/* ════════════════════════════════════════
+   OUTILS
+════════════════════════════════════════ */
+const MONTHS = ["janvier","février","mars","avril","mai","juin","juillet","août","septembre","octobre","novembre","décembre"];
+const DAYNAMES = ["Lun","Mar","Mer","Jeu","Ven","Sam","Dim"];
+
+function fmtMin(m){ return Math.floor(m/60) + "h" + String(m%60).padStart(2,"0"); }
+function fmtDur(m){
+  const h = Math.floor(m/60), r = m%60;
+  if (!h) return r + " min";
+  return h + "h" + (r ? String(r).padStart(2,"0") : "");
+}
+function toDateStr(d){
+  return d.getFullYear() + "-" + String(d.getMonth()+1).padStart(2,"0") + "-" + String(d.getDate()).padStart(2,"0");
+}
+function frDate(dateStr){
+  const [y,m,d] = dateStr.split("-").map(Number);
+  const dt = new Date(y, m-1, d);
+  const jours = ["dimanche","lundi","mardi","mercredi","jeudi","vendredi","samedi"];
+  return jours[dt.getDay()] + " " + d + " " + MONTHS[m-1] + " " + y;
+}
+
+/* ════════════════════════════════════════
+   ÉTAT
+════════════════════════════════════════ */
+const qty = {};
+PRESTAS.forEach(p => qty[p.id] = 0);
+const autreParts = new Set();
+let jaguaOption = false;
+let skipAccountWarning = false;
+let selectedDate = null;
+let selectedSlot = null;
+let viewYear, viewMonth;
+
+/* ════════════════════════════════════════
+   ÉTAPE 1 — PRESTATIONS
+════════════════════════════════════════ */
+function renderPrestas(){
+  const wrap = document.getElementById("prestaSel");
+  wrap.innerHTML = "";
+  PRESTAS.forEach(p => {
+    const row = document.createElement("div");
+    if (p.surDemande){
+      row.className = "autre-card";
+      row.innerHTML = `
+        <div style="display:flex;align-items:center;gap:12px;">
+          <input type="checkbox" class="check-autre" id="chk-${p.id}" ${qty[p.id] ? "checked" : ""} />
+          <div class="ps-info">
+            <p class="ps-nom">${p.nom}</p>
+            <p class="ps-meta">Précisez votre demande dans le message · durée estimée 45 min, ajustée par SMS</p>
+          </div>
+        </div>
+        <div id="autreParts" style="${qty[p.id] ? "" : "display:none;"}">
+          <p class="autre-parts-label">Quelle partie du corps ?</p>
+          <div class="autre-parts">
+            ${AUTRE_PARTS.map(part => `
+              <label class="part-pill">
+                <input type="checkbox" class="autre-part-chk" value="${part.id}" ${autreParts.has(part.id) ? "checked" : ""} />
+                ${part.nom}
+              </label>`).join("")}
+          </div>
+        </div>`;
+      row.querySelector("input.check-autre").addEventListener("change", e => {
+        qty[p.id] = e.target.checked ? 1 : 0;
+        const sub = row.querySelector("#autreParts");
+        if (sub) sub.style.display = e.target.checked ? "block" : "none";
+        if (!e.target.checked) autreParts.clear();
+        onSelectionChange();
+      });
+      row.querySelectorAll(".autre-part-chk").forEach(cb => {
+        cb.addEventListener("change", e => {
+          if (e.target.checked) autreParts.add(e.target.value);
+          else autreParts.delete(e.target.value);
+        });
+      });
+    } else {
+      row.className = "presta-sel-row";
+      row.innerHTML = `
+        <div class="ps-info">
+          <p class="ps-nom">${p.nom}</p>
+          <p class="ps-meta">${p.prix}€ · ${fmtDur(p.duree)} / ${p.unit}</p>
+        </div>
+        <div class="stepper">
+          <button type="button" aria-label="moins" onclick="changeQty('${p.id}',-1)">−</button>
+          <span class="qty" id="qty-${p.id}">0</span>
+          <button type="button" aria-label="plus" onclick="changeQty('${p.id}',1)">+</button>
+        </div>`;
+    }
+    wrap.appendChild(row);
+  });
+
+  const jaguaBadgeEnd = new Date("2026-07-17T00:00:00");
+  const jaguaShowBadge = new Date() < jaguaBadgeEnd;
+  const jaguaRow = document.createElement("div");
+  jaguaRow.className = "jagua-card";
+  jaguaRow.innerHTML = `
+    <input type="checkbox" id="chk-jagua" class="check-autre" ${jaguaOption ? "checked" : ""} />
+    <div class="ps-info">
+      <p class="ps-nom">Henné Jagua (noir) ${jaguaShowBadge ? '<span class="jagua-badge">Dispo à partir du vendredi 17</span>' : ""}</p>
+      <p class="ps-meta">+5€ · Le jagua est un matériel coûteux, le prix est justifié !</p>
+    </div>`;
+  jaguaRow.querySelector("input").addEventListener("change", e => {
+    jaguaOption = e.target.checked;
+    onSelectionChange();
+  });
+  wrap.appendChild(jaguaRow);
+}
+
+function changeQty(id, delta){
+  const p = PRESTAS.find(x => x.id === id);
+  qty[id] = Math.min(p.max, Math.max(0, qty[id] + delta));
+  document.getElementById("qty-" + id).textContent = qty[id];
+  onSelectionChange();
+}
+
+function totalDuration(){
+  return PRESTAS.reduce((s,p) => s + qty[p.id] * p.duree, 0);
+}
+function totalPrice(){
+  const base = PRESTAS.reduce((s,p) => s + (p.prix ? qty[p.id] * p.prix : 0), 0);
+  return base + (jaguaOption ? 5 : 0);
+}
+function hasAutre(){ return PRESTAS.some(p => p.surDemande && qty[p.id] > 0); }
+function nothingSelected(){ return PRESTAS.every(p => qty[p.id] === 0); }
+
+function selectionLabel(){
+  const parts = [];
+  PRESTAS.forEach(p => {
+    if (qty[p.id] > 0){
+      if (p.surDemande){
+        const chosen = [...autreParts].map(id => AUTRE_PARTS.find(x => x.id === id)?.nom).filter(Boolean);
+        parts.push(p.nom + (chosen.length ? " — " + chosen.join(", ") : "") + " (sur demande)");
+      }
+      else parts.push(qty[p.id] > 1 ? qty[p.id] + "× " + p.nom : p.nom);
+    }
+  });
+  if (jaguaOption) parts.push("Henné Jagua (+5€)");
+  return parts.join(" · ");
+}
+
+function onSelectionChange(){
+  const bar = document.getElementById("totalBar");
+  if (nothingSelected()){
+    bar.innerHTML = `<span><strong>Total : 0€</strong></span><span class="tb-right">Durée estimée : —</span>`;
+  } else {
+    const prix = totalPrice();
+    const prixTxt = prix + "€" + (hasAutre() ? " + sur demande" : "");
+    bar.innerHTML = `<span><strong>Total : ${prixTxt}</strong></span><span class="tb-right">Durée estimée : ${fmtDur(totalDuration())}</span>`;
+  }
+  selectedSlot = null;
+  renderSlots();
+  updateRecap();
+}
+
+/* ════════════════════════════════════════
+   ÉTAPE 2 — CALENDRIER & CRÉNEAUX
+════════════════════════════════════════ */
+function navMonth(delta){
+  viewMonth += delta;
+  if (viewMonth < 0){ viewMonth = 11; viewYear--; }
+  if (viewMonth > 11){ viewMonth = 0; viewYear++; }
+  renderCalendar();
+}
+
+function renderCalendar(){
+  document.getElementById("calMonth").textContent = MONTHS[viewMonth] + " " + viewYear;
+  const grid = document.getElementById("calGrid");
+  grid.innerHTML = "";
+  DAYNAMES.forEach(d => {
+    const c = document.createElement("div");
+    c.className = "cal-dayname";
+    c.textContent = d;
+    grid.appendChild(c);
+  });
+  const first = new Date(viewYear, viewMonth, 1);
+  const offset = (first.getDay() + 6) % 7;
+  const nDays = new Date(viewYear, viewMonth + 1, 0).getDate();
+  const today = new Date(); today.setHours(0,0,0,0);
+  const maxDate = new Date(today); maxDate.setMonth(maxDate.getMonth() + 1);
+
+  for (let i = 0; i < offset; i++){
+    const c = document.createElement("div");
+    c.className = "cal-cell off";
+    grid.appendChild(c);
+  }
+  for (let d = 1; d <= nDays; d++){
+    const cellDate = new Date(viewYear, viewMonth, d);
+    const ds = toDateStr(cellDate);
+    const c = document.createElement("div");
+    c.className = "cal-cell";
+    c.textContent = d;
+    if (ds === toDateStr(new Date())) c.classList.add("today");
+    if (cellDate < today || cellDate > maxDate){
+      c.classList.add("past");
+    } else {
+      c.addEventListener("click", () => {
+        selectedDate = ds;
+        selectedSlot = null;
+        renderCalendar();
+        renderSlots();
+        updateRecap();
+      });
+    }
+    if (ds === selectedDate) c.classList.add("selected");
+    grid.appendChild(c);
+  }
+}
+
+/* Créneaux collés bout à bout : 11h-11h40, 11h40-12h20…
+   → aucun trou entre les rendez-vous, peu de choix inutiles.
+   Après un créneau bloqué, la grille reprend dès la fin du blocage. */
+async function getSlotsFor(dateStr, duration, excludeId){
+  const blocked = await DB.getBlocked(dateStr);
+  const bookings = await DB.getBookings(dateStr);
+  const busy = [...blocked, ...bookings]
+    .filter(b => !excludeId || String(b.id) !== String(excludeId))
+    .map(b => ({ start: Number(b.start), end: Number(b.end) }))
+    .sort((a,b) => a.start - b.start);
+  const now = new Date();
+  const minStart = (dateStr === toDateStr(now))
+    ? now.getHours()*60 + now.getMinutes() + CONFIG.minNoticeMin
+    : 0;
+  const slots = [];
+  let s = CONFIG.openMin;
+  while (s + duration <= CONFIG.closeMin){
+    const e = s + duration;
+    const conflict = busy.find(b => s < b.end && e > b.start);
+    if (conflict){ s = conflict.end; continue; }
+    if (s >= minStart) slots.push({ start: s, end: e });
+    s = e;
+  }
+  return slots;
+}
+
+/* ════════════════════════════════════════
+   MODIFICATION D'UNE RÉSERVATION (côté cliente)
+════════════════════════════════════════ */
+let editingBooking = null;
+const editQty = {};
+PRESTAS.forEach(p => editQty[p.id] = 0);
+const editAutreParts = new Set();
+let editJagua = false;
+
+function renderEditPrestas(){
+  const wrap = document.getElementById("editPrestaSel");
+  wrap.innerHTML = "";
+  PRESTAS.forEach(p => {
+    const row = document.createElement("div");
+    if (p.surDemande){
+      row.className = "autre-card";
+      row.innerHTML = `
+        <div style="display:flex;align-items:center;gap:12px;">
+          <input type="checkbox" class="check-autre" ${editQty[p.id] ? "checked" : ""} />
+          <div class="ps-info">
+            <p class="ps-nom">${p.nom}</p>
+            <p class="ps-meta">durée estimée 45 min, ajustée par SMS</p>
+          </div>
+        </div>
+        <div class="editAutreParts" style="${editQty[p.id] ? "" : "display:none;"}">
+          <p class="autre-parts-label">Quelle partie du corps ?</p>
+          <div class="autre-parts">
+            ${AUTRE_PARTS.map(part => `
+              <label class="part-pill">
+                <input type="checkbox" class="edit-autre-part-chk" value="${part.id}" ${editAutreParts.has(part.id) ? "checked" : ""} />
+                ${part.nom}
+              </label>`).join("")}
+          </div>
+        </div>`;
+      row.querySelector("input.check-autre").addEventListener("change", e => {
+        editQty[p.id] = e.target.checked ? 1 : 0;
+        const sub = row.querySelector(".editAutreParts");
+        if (sub) sub.style.display = e.target.checked ? "block" : "none";
+        if (!e.target.checked) editAutreParts.clear();
+        onEditDateChange();
+      });
+      row.querySelectorAll(".edit-autre-part-chk").forEach(cb => {
+        cb.addEventListener("change", e => {
+          if (e.target.checked) editAutreParts.add(e.target.value);
+          else editAutreParts.delete(e.target.value);
+        });
+      });
+    } else {
+      row.className = "presta-sel-row";
+      row.innerHTML = `
+        <div class="ps-info">
+          <p class="ps-nom">${p.nom}</p>
+          <p class="ps-meta">${p.prix}€ · ${fmtDur(p.duree)} / ${p.unit}</p>
+        </div>
+        <div class="stepper">
+          <button type="button" onclick="changeEditQty('${p.id}',-1)">−</button>
+          <span class="qty" id="editQty-${p.id}">${editQty[p.id]}</span>
+          <button type="button" onclick="changeEditQty('${p.id}',1)">+</button>
+        </div>`;
+    }
+    wrap.appendChild(row);
+  });
+
+  const jaguaRow = document.createElement("div");
+  jaguaRow.className = "jagua-card";
+  jaguaRow.innerHTML = `
+    <input type="checkbox" class="check-autre" ${editJagua ? "checked" : ""} />
+    <div class="ps-info">
+      <p class="ps-nom">Henné Jagua (noir)</p>
+      <p class="ps-meta">+5€</p>
+    </div>`;
+  jaguaRow.querySelector("input").addEventListener("change", e => {
+    editJagua = e.target.checked;
+    onEditDateChange();
+  });
+  wrap.appendChild(jaguaRow);
+}
+
+function changeEditQty(id, delta){
+  const p = PRESTAS.find(x => x.id === id);
+  editQty[id] = Math.min(p.max, Math.max(0, editQty[id] + delta));
+  document.getElementById("editQty-" + id).textContent = editQty[id];
+  onEditDateChange();
+}
+
+function editTotalDuration(){
+  return PRESTAS.reduce((s,p) => s + editQty[p.id] * p.duree, 0);
+}
+
+function editSelectionLabel(){
+  const parts = [];
+  PRESTAS.forEach(p => {
+    if (editQty[p.id] > 0){
+      if (p.surDemande){
+        const chosen = [...editAutreParts].map(id => AUTRE_PARTS.find(x => x.id === id)?.nom).filter(Boolean);
+        parts.push(p.nom + (chosen.length ? " — " + chosen.join(", ") : "") + " (sur demande)");
+      }
+      else parts.push(editQty[p.id] > 1 ? editQty[p.id] + "× " + p.nom : p.nom);
+    }
+  });
+  if (editJagua) parts.push("Henné Jagua (+5€)");
+  return parts.join(" · ");
+}
+
+function openEditBooking(b){
+  editingBooking = b;
+  PRESTAS.forEach(p => editQty[p.id] = 0);
+  editAutreParts.clear();
+  editJagua = false;
+  document.getElementById("editCurrentInfo").textContent =
+    `Réservation actuelle : ${frDate(b.date)} à ${fmtMin(Number(b.start))} — ${b.prestas || ""}`;
+  renderEditPrestas();
+  const dateInput = document.getElementById("editDate");
+  const today = toDateStr(new Date());
+  const maxD = new Date(); maxD.setMonth(maxD.getMonth() + 1);
+  dateInput.min = today;
+  dateInput.max = toDateStr(maxD);
+  dateInput.value = b.date;
+  document.getElementById("editSlotSelect").innerHTML = `<option value="">Choisis d'abord une prestation</option>`;
+  document.getElementById("editBookingErr").textContent = "";
+  document.getElementById("editBookingModal").classList.add("open");
+}
+
+function closeEditBooking(){
+  document.getElementById("editBookingModal").classList.remove("open");
+  editingBooking = null;
+}
+
+async function onEditDateChange(){
+  const sel = document.getElementById("editSlotSelect");
+  const dateInput = document.getElementById("editDate");
+  const dur = editTotalDuration();
+  if (!dur || !dateInput.value){
+    sel.innerHTML = `<option value="">Choisis d'abord une prestation et une date</option>`;
+    return;
+  }
+  sel.innerHTML = `<option value="">Chargement…</option>`;
+  const slots = await getSlotsFor(dateInput.value, dur, editingBooking ? editingBooking.id : null);
+  if (!slots.length){
+    sel.innerHTML = `<option value="">Aucun créneau dispo ce jour</option>`;
+    return;
+  }
+  sel.innerHTML = slots.map(s => `<option value="${s.start}|${s.end}">${fmtMin(s.start)} – ${fmtMin(s.end)}</option>`).join("");
+}
+
+async function saveEditBooking(){
+  const errEl = document.getElementById("editBookingErr");
+  errEl.textContent = "";
+  if (!editingBooking) return;
+  if (editTotalDuration() === 0){
+    errEl.textContent = "Choisis au moins une prestation.";
+    return;
+  }
+  const dateInput = document.getElementById("editDate");
+  const sel = document.getElementById("editSlotSelect");
+  if (!dateInput.value || !sel.value){
+    errEl.textContent = "Choisis une date et un horaire.";
+    return;
+  }
+  const [start, end] = sel.value.split("|").map(Number);
+  try {
+    await DB.updateBooking(editingBooking.id, {
+      date: dateInput.value,
+      start, end,
+      prestas: editSelectionLabel()
+    });
+  } catch(e){
+    errEl.textContent = "Erreur : " + e.message;
+    return;
+  }
+  closeEditBooking();
+  const s = getSession();
+  if (s) loadDashboard(s, s.referral_code);
+  if (admLogged){
+    admRenderAllBookings();
+    admRenderNouveaux();
+  }
+}
+
+async function renderSlots(){
+  const grid = document.getElementById("slotsGrid");
+  const title = document.getElementById("slotsTitle");
+  if (nothingSelected()){
+    title.textContent = "Créneaux disponibles";
+    grid.innerHTML = `<p class="slots-empty">Choisissez d'abord votre prestation puis un jour dans le calendrier.</p>`;
+    return;
+  }
+  if (!selectedDate){
+    title.textContent = "Créneaux disponibles";
+    grid.innerHTML = `<p class="slots-empty">Choisissez un jour dans le calendrier.</p>`;
+    return;
+  }
+  title.textContent = "Créneaux du " + frDate(selectedDate);
+  grid.innerHTML = `<p class="slots-empty">Chargement…</p>`;
+  const dur = totalDuration();
+  const slots = await getSlotsFor(selectedDate, dur);
+  grid.innerHTML = "";
+  if (!slots.length){
+    grid.innerHTML = `<p class="slots-empty">Aucun créneau disponible ce jour-là — essayez un autre jour 🤍</p>`;
+    return;
+  }
+  slots.forEach(s => {
+    const b = document.createElement("button");
+    b.type = "button";
+    b.className = "slot";
+    b.textContent = fmtMin(s.start) + " – " + fmtMin(s.end);
+    if (selectedSlot && selectedSlot.start === s.start) b.classList.add("selected");
+    b.addEventListener("click", () => {
+      selectedSlot = s;
+      document.querySelectorAll(".slot").forEach(x => x.classList.remove("selected"));
+      b.classList.add("selected");
+      updateRecap();
+    });
+    grid.appendChild(b);
+  });
+}
+
+/* ════════════════════════════════════════
+   ÉTAPE 3 — RÉCAP & ENVOI
+════════════════════════════════════════ */
+function updateRecap(){
+  const box = document.getElementById("recapBox");
+  if (nothingSelected() || !selectedDate || !selectedSlot){
+    box.textContent = "Sélectionnez une prestation, une date et une heure pour voir le récapitulatif.";
+    return;
+  }
+  const prix = totalPrice();
+  const prixTxt = prix + "€" + (hasAutre() ? " + sur demande" : "");
+  box.innerHTML = `
+    <strong>Récapitulatif</strong><br>
+    ${selectionLabel()}<br>
+    ${frDate(selectedDate)} · <strong>${fmtMin(selectedSlot.start)} – ${fmtMin(selectedSlot.end)}</strong><br>
+    Total : <strong>${prixTxt}</strong>`;
+}
+
+function showErr(msg){
+  const e = document.getElementById("formErr");
+  e.textContent = msg;
+  e.style.display = "block";
+  setTimeout(() => e.style.display = "none", 5000);
+}
+
+async function confirmRdv(){
+  if (nothingSelected()) return showErr("Choisissez au moins une prestation.");
+  if (!selectedDate || !selectedSlot) return showErr("Choisissez une date et un créneau.");
+  const prenom = document.getElementById("f-prenom").value.trim();
+  const nom = document.getElementById("f-nom").value.trim();
+  const tel = document.getElementById("f-tel").value.trim();
+  const insta = document.getElementById("f-insta").value.trim();
+  const refCode = document.getElementById("f-ref").value.trim().toUpperCase();
+  const msg = document.getElementById("f-msg").value.trim();
+  if (!prenom || !nom) return showErr("Merci d'indiquer votre prénom et votre nom.");
+  if (!/^[\d+\s().-]{9,}$/.test(tel)) return showErr("Merci d'indiquer un numéro de téléphone valide (pour le SMS).");
+  if (hasAutre() && !msg) return showErr("Pour « Autre partie du corps », précisez votre demande dans le message.");
+  const session = getSession();
+  if (refCode && session && session.referral_code && refCode === session.referral_code.toUpperCase()){
+    return showErr("Tu ne peux pas utiliser ton propre code de parrainage.");
+  }
+  if (!session && !skipAccountWarning){
+    {
+      const warn = document.createElement("div");
+      warn.id = "noAccountWarned";
+      warn.style.cssText = "position:fixed;inset:0;background:rgba(59,57,55,.55);z-index:300;display:flex;align-items:center;justify-content:center;padding:24px;animation:loyaltyIn .4s cubic-bezier(.16,1,.3,1);";
+      warn.innerHTML = `
+        <div style="background:linear-gradient(135deg,#fdf6f8,#f9eef1);border:1px solid #f0d9e0;padding:30px 22px;max-width:340px;width:100%;text-align:center;position:relative;overflow:hidden;">
+          <div style="position:absolute;top:-30px;right:-30px;width:90px;height:90px;border-radius:50%;background:radial-gradient(circle,rgba(214,124,153,.18),transparent 70%);pointer-events:none;"></div>
+          <p style="font-family:'Cormorant Garamond',serif;font-style:italic;font-size:19px;color:#A0527A;margin-bottom:8px;">Petit moment ✨</p>
+          <p style="font-size:13px;color:#9a7180;line-height:1.7;margin-bottom:22px;">
+            Tu n'as pas de compte HiinArt.<br>
+            Avec un compte tu accèdes à ton <strong style="color:#A0527A;">coupon de fidélité</strong>, tes <strong style="color:#A0527A;">parrainages</strong> et l'historique de tes RDV 🤍<br><br>
+            Tu veux continuer sans compte ?
+          </p>
+          <div style="display:flex;flex-direction:column;gap:10px;">
+            <button id="noAccContinue" style="background:#D67C99;color:#fff;border:none;padding:14px 20px;font-family:inherit;font-size:12px;letter-spacing:.08em;text-transform:uppercase;cursor:pointer;">Oui, continuer sans compte</button>
+            <button id="noAccLogin" style="background:transparent;color:#A0527A;border:1px solid #D67C99;padding:13px 20px;font-family:inherit;font-size:12px;letter-spacing:.08em;text-transform:uppercase;cursor:pointer;">Non, créer mon compte</button>
+          </div>
+        </div>`;
+      document.body.appendChild(warn);
+      document.getElementById("noAccLogin").onclick = () => { warn.remove(); openAccount(); };
+      document.getElementById("noAccContinue").onclick = () => { skipAccountWarning = true; warn.remove(); confirmRdv(); };
+      return;
+    }
+  }
+  skipAccountWarning = false;
+
+  const btn = document.querySelector(".submit-wrap .btn");
+  btn.disabled = true; btn.textContent = "Envoi…";
+
+  const prix = totalPrice();
+  const prixTxt = prix + "€" + (hasAutre() ? " + sur demande" : "");
+
+  try {
+    await DB.addBooking({
+      date: selectedDate,
+      start: selectedSlot.start,
+      end: selectedSlot.end,
+      prenom, nom, tel,
+      prestas: selectionLabel(),
+      message: msg || "",
+      referral_code: refCode || "",
+      user_id: getSession() ? getSession().id : null
+    });
+  } catch(e){}
+
+  document.getElementById("modalRecap").innerHTML = `
+    <strong>${prenom} ${nom}</strong><br>
+    ${selectionLabel()}<br>
+    ${frDate(selectedDate)} · <strong>${fmtMin(selectedSlot.start)} – ${fmtMin(selectedSlot.end)}</strong><br>
+    Total : <strong>${prixTxt}</strong> · 📞 ${tel}${insta ? " · " + insta : ""}`;
+  await renderLoyaltyCard();
+  document.getElementById("confirmModal").classList.add("open");
+
+  btn.disabled = false; btn.textContent = "Confirmer mon RDV";
+}
+
+const HEART_SVG = `<svg viewBox="0 0 24 24"><path d="M12 21s-7.5-4.9-10-9.3C.5 8.4 2 5 5.4 5c2 0 3.4 1.1 4.6 2.7C11.2 6.1 12.6 5 14.6 5 18 5 19.5 8.4 22 11.7 19.5 16.1 12 21 12 21z"/></svg>`;
+const GIFT_SVG = `<svg viewBox="0 0 24 24"><path d="M20 7h-2.2c.1-.3.2-.7.2-1 0-1.7-1.3-3-3-3-1.4 0-2.4.8-3 1.8C11.4 3.8 10.4 3 9 3 7.3 3 6 4.3 6 6c0 .3.1.7.2 1H4c-.6 0-1 .4-1 1v2c0 .6.4 1 1 1v8c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2v-8c.6 0 1-.4 1-1V8c0-.6-.4-1-1-1zM15 5c.6 0 1 .4 1 1s-.4 1-1 1h-1.6c.3-.6.9-2 1.6-2zM9 5c.7 0 1.3 1.4 1.6 2H9c-.6 0-1-.4-1-1s.4-1 1-1zM5 9h6v2H5V9zm0 4h6v6H7c-.6 0-1-.4-1-1v-5zm14 5c0 .6-.4 1-1 1h-4v-6h5v5zm-5-7V9h6v2h-6z"/></svg>`;
+
+function buildLoyaltyStamps(container, progress){
+  container.innerHTML = "";
+  for (let i = 0; i < 10; i++){
+    const dot = document.createElement("div");
+    dot.className = "loyalty-stamp";
+    const isLast = i === 9;
+    if (i < progress){
+      dot.classList.add(isLast ? "reward" : "filled");
+      dot.style.animationDelay = (i * 0.07) + "s";
+      dot.innerHTML = isLast ? GIFT_SVG : HEART_SVG;
+    } else if (i === progress){
+      dot.classList.add(isLast ? "reward-next" : "next");
+      dot.innerHTML = isLast ? GIFT_SVG : HEART_SVG;
+    }
+    container.appendChild(dot);
+  }
+}
+
+async function renderLoyaltyCard(){
+  const card = document.getElementById("loyaltyCard");
+  const s = getSession();
+  if (!s){ card.style.display = "none"; return; }
+  const count = await DB.getAttendedCount(s.id);
+  const progress = count % 10;
+  buildLoyaltyStamps(document.getElementById("loyaltyStamps"), progress);
+  const noteEl = document.querySelector("#loyaltyCard .loyalty-note");
+  const existingBanner = card.querySelector(".loyalty-reward-banner");
+  if (existingBanner) existingBanner.remove();
+  if (count > 0 && count % 10 === 0){
+    const banner = document.createElement("p");
+    banner.className = "loyalty-reward-banner";
+    banner.textContent = "🎁 Prestation offerte !";
+    card.querySelector(".loyalty-stamps").insertAdjacentElement("afterend", banner);
+    noteEl.textContent = "Présentez-vous au prochain RDV pour en profiter 🤍";
+  } else {
+    noteEl.textContent = `Votre coupon sera utilisé lorsque vous vous présenterez au rendez-vous 🤍 (${progress}/10)`;
+  }
+  card.style.display = "block";
+}
+
+function closeConfirm(){
+  document.getElementById("confirmModal").classList.remove("open");
+  PRESTAS.forEach(p => qty[p.id] = 0);
+  autreParts.clear();
+  jaguaOption = false;
+  selectedDate = null; selectedSlot = null;
+  ["f-prenom","f-nom","f-tel","f-insta","f-msg"].forEach(id => document.getElementById(id).value = "");
+  renderPrestas(); onSelectionChange(); renderCalendar();
+  window.scrollTo({ top: 0, behavior: "smooth" });
+}
+
+/* ════════════════════════════════════════
+   ADMIN
+════════════════════════════════════════ */
+let admLogged = false;
+
+function openAdmin(){
+  document.getElementById("adminModal").classList.add("open");
+  if (admLogged){ showAdmPanel(); }
+  else {
+    document.getElementById("adminModalInner").classList.remove("modal-admin");
+    document.getElementById("admLogin").style.display = "block";
+    document.getElementById("admPanel").style.display = "none";
+    setTimeout(() => document.getElementById("admPass").focus(), 50);
+  }
+}
+function closeAdmin(){
+  document.getElementById("adminModal").classList.remove("open");
+  if (location.hash === "#admin") history.replaceState(null, "", location.pathname + location.search);
+  renderReviews();
+  renderSlots();
+}
+function admSwitchTab(tab){
+  document.querySelectorAll(".adm-tab-btn").forEach(b => b.classList.toggle("active", b.dataset.tab === tab));
+  document.querySelectorAll(".adm-tab-page").forEach(p => p.classList.remove("active"));
+  const map = { creneaux:"admTabCreneaux", nouveaux:"admTabNouveaux", reservations:"admTabReservations", galerie:"admTabGalerie", promo:"admTabPromo" };
+  if (tab === "nouveaux") admMarkNouveauxSeen();
+  document.getElementById(map[tab]).classList.add("active");
+}
+function admTryLogin(){
+  const v = document.getElementById("admPass").value;
+  if (v === CONFIG.adminPassword){
+    admLogged = true;
+    document.getElementById("admPass").value = "";
+    showAdmPanel();
+  } else {
+    const e = document.getElementById("admErr");
+    e.textContent = "Mot de passe incorrect.";
+    e.style.display = "block";
+    setTimeout(() => e.style.display = "none", 3000);
+  }
+}
+function showAdmPanel(){
+  document.getElementById("adminModalInner").classList.add("modal-admin");
+  document.getElementById("admLogin").style.display = "none";
+  document.getElementById("admPanel").style.display = "block";
+  const d = document.getElementById("admDate");
+  if (!d.value) d.value = toDateStr(new Date());
+  const from = document.getElementById("admFrom");
+  const to = document.getElementById("admTo");
+  if (!from.options.length){
+    for (let m = CONFIG.openMin; m <= CONFIG.closeMin; m += CONFIG.adminStep){
+      from.add(new Option(fmtMin(m), m));
+      to.add(new Option(fmtMin(m), m));
+    }
+    from.value = CONFIG.openMin;
+    to.value = CONFIG.openMin + 60;
+  }
+  admRender();
+  admRenderGalleryList();
+  admLoadPromo();
+  admPurgeOldBookings().then(() => admRenderAllBookings());
+  admRenderNouveaux();
+  renderReviews();
+}
+
+function gcalLinkFor(b){
+  const pad = n => String(n).padStart(2, "0");
+  const toGCal = (dateStr, min) => {
+    const [y,m,d] = dateStr.split("-").map(Number);
+    const h = Math.floor(min/60), mm = min%60;
+    return `${y}${pad(m)}${pad(d)}T${pad(h)}${pad(mm)}00`;
+  };
+  const start = toGCal(b.date, Number(b.start));
+  const end = toGCal(b.date, Number(b.end));
+  const title = encodeURIComponent(`HiinArt — ${b.prenom || ""} ${b.nom || ""}`.trim());
+  const details = encodeURIComponent(`Prestation(s) : ${b.prestas || "N/A"}\nTéléphone : ${b.tel || "N/A"}${b.message ? "\nMessage : " + b.message : ""}`);
+  return `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${title}&dates=${start}/${end}&details=${details}&ctz=Europe/Paris`;
+}
+
+// Supprime les réservations dont le RDV est terminé depuis 2 jours ou plus
+async function admPurgeOldBookings(){
+  try {
+    const bookings = await DB.getAllBookings();
+    const now = Date.now();
+    const toDelete = bookings.filter(b => {
+      const endMs = new Date(b.date + "T00:00:00").getTime() + Number(b.end) * 60000;
+      return now - endMs >= 2 * 24 * 60 * 60 * 1000;
+    });
+    for (const b of toDelete){
+      try { await DB.removeBooking(b.date, b.id); } catch(e){}
+    }
+  } catch(e){}
+}
+
+let admNouveauxSub = "new";
+
+function admSwitchNouveauxSub(sub){
+  admNouveauxSub = sub;
+  document.getElementById("admNvSubBtn-new").style.background = sub === "new" ? "var(--ink)" : "transparent";
+  document.getElementById("admNvSubBtn-new").style.color = sub === "new" ? "var(--bg)" : "var(--ink)";
+  document.getElementById("admNvSubBtn-nogcal").style.background = sub === "nogcal" ? "var(--ink)" : "transparent";
+  document.getElementById("admNvSubBtn-nogcal").style.color = sub === "nogcal" ? "var(--bg)" : "var(--ink)";
+  admRenderNouveauxList();
+}
+
+function admRenderBookingItem(wrap, b){
+  const div = document.createElement("div");
+  div.className = "adm-item";
+  div.style.flexDirection = "column";
+  div.style.alignItems = "flex-start";
+  div.innerHTML = `<span style="width:100%;"><strong>${frDate(b.date)} · ${fmtMin(Number(b.start))} – ${fmtMin(Number(b.end))}</strong> · ${b.prenom || ""} ${b.nom || ""}<br>
+    <span style="color:var(--muted);font-size:12px;">${b.prestas || ""} · 📞 ${b.tel || ""}${b.message ? "<br>« " + b.message + " »" : ""}</span></span>`;
+  const btnRow = document.createElement("div");
+  btnRow.style.cssText = "display:flex;gap:8px;flex-wrap:wrap;margin-top:8px;";
+  const calBtn = document.createElement("a");
+  const added = admGcalAddedIdsCache.has(String(b.id));
+  calBtn.className = "btn " + (added ? "btn-ghost" : "btn-dark") + " btn-small";
+  calBtn.textContent = added ? "✓ Déjà sur Google Agenda" : "📅 Ajouter à Google Agenda";
+  calBtn.target = "_blank";
+  calBtn.rel = "noopener";
+  calBtn.href = gcalLinkFor(b);
+  calBtn.onclick = () => admMarkGcalAdded(b.id);
+  btnRow.appendChild(calBtn);
+  div.appendChild(btnRow);
+  wrap.appendChild(div);
+}
+
+async function admRenderNouveaux(){
+  const badge = document.getElementById("admNouveauxBadge");
+  const rawSeen = store.get("admSeenBookingIds");
+  let bookings = [];
+  try { bookings = await DB.getAllBookings(); } catch(e){ bookings = []; }
+  admAllBookingsCache = bookings;
+  admAllBookingIdsCache = bookings.map(b => String(b.id));
+  admGcalAddedIdsCache = new Set((store.get("admGcalAddedIds") || []).map(String));
+  if (rawSeen === null){
+    // premier chargement du système "Nouveaux" : on ne veut pas que tout l'historique s'affiche comme nouveau
+    store.set("admSeenBookingIds", admAllBookingIdsCache);
+    admNouveauxCache = [];
+  } else {
+    const seenIds = new Set(rawSeen.map(String));
+    admNouveauxCache = bookings.filter(b => !seenIds.has(String(b.id)));
+  }
+  if (badge){
+    if (admNouveauxCache.length){ badge.textContent = admNouveauxCache.length; badge.style.display = "inline-block"; }
+    else { badge.style.display = "none"; }
+  }
+  admRenderNouveauxList();
+}
+
+function admRenderNouveauxList(){
+  const wrap = document.getElementById("admNouveauxBookings");
+  if (!wrap) return;
+  const list = admNouveauxSub === "new"
+    ? admNouveauxCache
+    : admAllBookingsCache.filter(b => !admGcalAddedIdsCache.has(String(b.id)));
+  if (!list.length){
+    wrap.innerHTML = `<p class="adm-empty">${admNouveauxSub === "new" ? "Aucune nouvelle réservation." : "Tout est enregistré dans Google Agenda 🤍"}</p>`;
+    return;
+  }
+  wrap.innerHTML = "";
+  list.forEach(b => admRenderBookingItem(wrap, b));
+}
+
+function admMarkGcalAdded(id){
+  admGcalAddedIdsCache.add(String(id));
+  store.set("admGcalAddedIds", [...admGcalAddedIdsCache]);
+  admRenderNouveauxList();
+}
+
+// Appelée quand la personne ouvre l'onglet "Nouveaux" : marque tout comme vu (bulle repasse à rien)
+function admMarkNouveauxSeen(){
+  const seenIds = new Set((store.get("admSeenBookingIds") || []).map(String));
+  admAllBookingIdsCache.forEach(id => seenIds.add(id));
+  store.set("admSeenBookingIds", [...seenIds]);
+  const badge = document.getElementById("admNouveauxBadge");
+  if (badge) badge.style.display = "none";
+  admRenderNouveaux();
+}
+let admNouveauxCache = [];
+let admAllBookingIdsCache = [];
+let admAllBookingsCache = [];
+let admGcalAddedIdsCache = new Set();
+
+
+async function admRenderAllBookings(){
+  function gcalLink(b){
+    const pad = n => String(n).padStart(2, "0");
+    const toGCal = (dateStr, min) => {
+      const [y,m,d] = dateStr.split("-").map(Number);
+      const h = Math.floor(min/60), mm = min%60;
+      return `${y}${pad(m)}${pad(d)}T${pad(h)}${pad(mm)}00`;
+    };
+    const start = toGCal(b.date, Number(b.start));
+    const end = toGCal(b.date, Number(b.end));
+    const title = encodeURIComponent(`HiinArt — ${b.prenom || ""} ${b.nom || ""}`.trim());
+    const details = encodeURIComponent(`Prestation(s) : ${b.prestas || "N/A"}\nTéléphone : ${b.tel || "N/A"}${b.message ? "\nMessage : " + b.message : ""}`);
+    return `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${title}&dates=${start}/${end}&details=${details}&ctz=Europe/Paris`;
+  }
+
+  const wrap = document.getElementById("admAllBookings");
+  if (!wrap) return;
+  wrap.innerHTML = `<p class="adm-empty">Chargement…</p>`;
+  const bookings = await DB.getAllBookings();
+  if (!bookings.length){
+    wrap.innerHTML = `<p class="adm-empty">Aucune réservation pour le moment.</p>`;
+    return;
+  }
+  wrap.innerHTML = "";
+  bookings.forEach(b => {
+    const div = document.createElement("div");
+    div.className = "adm-item";
+    div.style.flexDirection = "column";
+    div.style.alignItems = "flex-start";
+    const bookingEndMs = new Date(b.date + "T00:00:00").getTime() + Number(b.end) * 60000;
+    if (Date.now() - bookingEndMs > 24 * 60 * 60 * 1000){
+      div.style.opacity = "0.45";
+    }
+    div.innerHTML = `<span style="width:100%;"><strong>${frDate(b.date)} · ${fmtMin(Number(b.start))} – ${fmtMin(Number(b.end))}</strong> · ${b.prenom || ""} ${b.nom || ""}<br>
+      <span style="color:var(--muted);font-size:12px;">${b.prestas || ""} · 📞 ${b.tel || ""}${b.message ? "<br>« " + b.message + " »" : ""}${b.referral_code ? `<br>🎁 Parrainée par : <strong>${b.referral_code}</strong>` : ""}${b.user_id ? `<br><span id="admAllRefStatus-${b.id}">Vérification parrainage…</span>` : `<br><em>Compte non lié — pas d'historique</em>`}${b.user_id ? `<br>${b.attended ? "🤍 Tamponné (cliente venue)" : "Tampon non encore validé"}` : ""}</span></span>`;
+    const btnRow = document.createElement("div");
+    btnRow.style.cssText = "display:flex;gap:8px;flex-wrap:wrap;margin-top:8px;";
+
+    const calBtn = document.createElement("a");
+    calBtn.className = "btn btn-ghost btn-small";
+    calBtn.textContent = "📅 Ajouter à Google Agenda";
+    calBtn.target = "_blank";
+    calBtn.rel = "noopener";
+    calBtn.href = gcalLink(b);
+    btnRow.appendChild(calBtn);
+
+    const editBtn = document.createElement("button");
+    editBtn.className = "btn btn-ghost btn-small";
+    editBtn.textContent = "✏️ Modifier";
+    editBtn.onclick = () => openEditBooking(b);
+    btnRow.appendChild(editBtn);
+
+    if (b.user_id){
+      const photoBtn = document.createElement("button");
+      photoBtn.className = "btn btn-ghost btn-small";
+      photoBtn.textContent = "📷 Ajouter une photo à sa fiche";
+      photoBtn.onclick = () => admAddClientPhoto(b.user_id, b.prenom);
+      btnRow.appendChild(photoBtn);
+
+      const stampBtn = document.createElement("button");
+      stampBtn.className = "btn btn-dark btn-small";
+      stampBtn.textContent = b.attended ? "✓ Annuler le tampon" : "🤍 Marquer cliente venue (tampon)";
+      stampBtn.onclick = async () => {
+        try {
+          await DB.setAttended(b.id, !b.attended);
+        } catch(err){
+          alert("Erreur : " + err.message);
+          return;
+        }
+        admRenderAllBookings();
+      };
+      btnRow.appendChild(stampBtn);
+    }
+    div.appendChild(btnRow);
+    wrap.appendChild(div);
+
+    if (b.user_id){
+      sbFetch(`users?id=eq.${b.user_id}&select=referral_code`).then(rows => {
+        const code = rows && rows[0] && rows[0].referral_code;
+        if (!code) return;
+        DB.getReferralCount(code).then(n => {
+          const el = document.getElementById(`admAllRefStatus-${b.id}`);
+          if (el) el.innerHTML = n > 0 ? `🎁 A déjà parrainé <strong>${n}</strong> personne(s)` : "Aucun parrainage pour le moment";
+        });
+      }).catch(()=>{});
+    }
+  });
+}
+
+async function admRender(){
+  const date = document.getElementById("admDate").value;
+  const blocksEl = document.getElementById("admBlocks");
+  const bookEl = document.getElementById("admBookings");
+  blocksEl.innerHTML = `<p class="adm-empty">Chargement…</p>`;
+  bookEl.innerHTML = `<p class="adm-empty">Chargement…</p>`;
+
+  const blocks = await DB.getBlocked(date);
+  blocksEl.innerHTML = "";
+  if (!blocks.length) blocksEl.innerHTML = `<p class="adm-empty">Aucun créneau bloqué.</p>`;
+  blocks.forEach(b => {
+    const div = document.createElement("div");
+    div.className = "adm-item";
+    div.innerHTML = `<span>🚫 ${fmtMin(Number(b.start))} – ${fmtMin(Number(b.end))}</span>`;
+    const x = document.createElement("button");
+    x.className = "x"; x.textContent = "×"; x.title = "Débloquer";
+    x.addEventListener("click", async () => {
+      try { await DB.removeBlocked(date, b.id); } catch(err){ alert("Erreur : " + err.message); return; }
+      admRender();
+    });
+    div.appendChild(x);
+    blocksEl.appendChild(div);
+  });
+
+  const bookings = await DB.getBookings(date);
+  bookEl.innerHTML = "";
+  if (!bookings.length) bookEl.innerHTML = `<p class="adm-empty">Aucune réservation enregistrée sur cet appareil.</p>`;
+  bookings.forEach(b => {
+    const div = document.createElement("div");
+    div.className = "adm-item";
+    div.style.flexDirection = "column";
+    div.style.alignItems = "flex-start";
+    div.innerHTML = `<span style="width:100%;"><strong>${fmtMin(Number(b.start))} – ${fmtMin(Number(b.end))}</strong> · ${b.prenom || ""} ${b.nom || ""}<br>
+      <span style="color:var(--muted);font-size:12px;">${b.prestas || ""} · 📞 ${b.tel || ""}${b.message ? "<br>« " + b.message + " »" : ""}${b.referral_code ? `<br>🎁 Parrainée par : <strong>${b.referral_code}</strong>` : ""}${b.user_id ? `<br><span id="admRefStatus-${b.id}">Vérification parrainage…</span>` : `<br><em>Compte non lié — pas d'historique</em>`}</span></span>`;
+    const actions = document.createElement("div");
+    actions.style.cssText = "display:flex;gap:8px;margin-top:8px;";
+    if (b.user_id){
+      const photoBtn = document.createElement("button");
+      photoBtn.className = "btn btn-ghost btn-small";
+      photoBtn.textContent = "📷 Ajouter une photo à sa fiche";
+      photoBtn.onclick = () => admAddClientPhoto(b.user_id, b.prenom);
+      actions.appendChild(photoBtn);
+    }
+    const x = document.createElement("button");
+    x.className = "x"; x.textContent = "×"; x.title = "Annuler ce RDV";
+    x.addEventListener("click", async () => {
+      if (confirm("Annuler ce rendez-vous ? Le créneau redeviendra disponible.")){
+        try { await DB.removeBooking(date, b.id); } catch(err){ alert("Erreur : " + err.message); return; }
+        admRender();
+      }
+    });
+    div.appendChild(actions);
+    div.appendChild(x);
+    bookEl.appendChild(div);
+
+    if (b.user_id){
+      sbFetch(`users?id=eq.${b.user_id}&select=referral_code`).then(rows => {
+        const code = rows && rows[0] && rows[0].referral_code;
+        if (!code) return;
+        DB.getReferralCount(code).then(n => {
+          const el = document.getElementById(`admRefStatus-${b.id}`);
+          if (el) el.innerHTML = n > 0 ? `🎁 A déjà parrainé <strong>${n}</strong> personne(s)` : "Aucun parrainage pour le moment";
+        });
+      }).catch(()=>{});
+    }
+  });
+
+  document.getElementById("admNote").innerHTML = sbOn()
+    ? "✓ Synchro en ligne activée : vos blocages sont visibles par toutes les clientes."
+    : "ℹ️ <strong>Mode local :</strong> pour l'instant les blocages ne sont enregistrés que sur <strong>cet appareil</strong>. Les notifs de RDV arrivent quand même par email. Demande à Claude d'activer la synchro en ligne (gratuit) pour que tes blocages s'appliquent partout.";
+}
+
+async function admAddBlock(){
+  const date = document.getElementById("admDate").value;
+  const s = Number(document.getElementById("admFrom").value);
+  const e = Number(document.getElementById("admTo").value);
+  if (e <= s) return alert("L'heure de fin doit être après l'heure de début.");
+  try {
+    await DB.addBlocked(date, s, e);
+  } catch(err){
+    alert("Erreur : " + err.message);
+    return;
+  }
+  admRender();
+}
+async function admBlockDay(){
+  const date = document.getElementById("admDate").value;
+  try {
+    await DB.addBlocked(date, CONFIG.openMin, CONFIG.closeMin);
+  } catch(err){
+    alert("Erreur : " + err.message);
+    return;
+  }
+  admRender();
+}
+
+/* ════════════════════════════════════════
+   INIT
+════════════════════════════════════════ */
+(function init(){
+  const now = new Date();
+  viewYear = now.getFullYear();
+  viewMonth = now.getMonth();
+  renderPrestas();
+  renderCalendar();
+  onSelectionChange();
+  updateAccountLink();
+  renderStarPicker();
+  renderGallery();
+  renderReviews();
+  loadPromo();
+  renderPromoReferral();
+  if (location.hash === "#admin") openAdmin();
+  window.addEventListener("hashchange", () => {
+    if (location.hash === "#admin") openAdmin();
+  });
+
+  // scroll reveal
+  const revealObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting){
+        entry.target.classList.add("visible");
+        revealObserver.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.12 });
+  document.querySelectorAll(".reveal, .reveal-stagger").forEach(el => revealObserver.observe(el));
+
+  // nav shrink on scroll
+  const navEl = document.querySelector("nav");
+  window.addEventListener("scroll", () => {
+    navEl.classList.toggle("scrolled", window.scrollY > 30);
+  }, { passive: true });
+})();
+</script>
+</body>
+</html>
